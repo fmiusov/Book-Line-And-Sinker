@@ -7,7 +7,24 @@
 
 // Requiring our Todo model
 var db = require("../models");
-const {Op} = db.Sequelize;
+const { Op } = db.Sequelize;
+
+// helper functions
+const authorRegexp = (author) => {
+  let temp;
+  let splitString = author.trim().split(/[\s\.]+/);
+  console.log(splitString);
+  temp = splitString.map((s) => {
+    if (s.length <= 3) {
+      // return `${s[0]}\.? *${s[1]}`;
+      return s.split(/\B/).join("\\.? *");
+    } else {
+      return s;
+    }
+  });
+  console.log(temp);
+  return temp.join("\\.? *");
+};
 
 // Routes
 // =============================================================
@@ -19,13 +36,16 @@ module.exports = function (app) {
       let results = await db.Book.findAll({
         where: {
           title: {
-            [Op.like]: nameLike
+            [Op.like]: nameLike,
           },
           languageCode: {
-            [Op.like]: "en%"
-          }
+            [Op.like]: "en%",
+          },
         },
-        order: [["ratingsCount", "DESC"], ["averageRating", "DESC"]]
+        order: [
+          ["ratingsCount", "DESC"],
+          ["averageRating", "DESC"],
+        ],
       });
       res.json(results);
     } catch (err) {
@@ -33,4 +53,23 @@ module.exports = function (app) {
     }
   });
 
+  app.get("/api/books/author/search/:author", async (req, res) => {
+    try {
+      let author = authorRegexp(req.params.author);
+      let results = await db.Book.findAll({
+        where: {
+          authors: {
+            [Op.regexp]: author,
+          },
+        },
+        order: [
+          ["ratingsCount", "DESC"],
+          ["averageRating", "DESC"],
+        ],
+      });
+      res.json(results);
+    } catch (err) {
+      console.log(err);
+    }
+  });
 };
