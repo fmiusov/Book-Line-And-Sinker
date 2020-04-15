@@ -1,17 +1,17 @@
 {
-    "parserOptions": {
+  "parserOptions": {
       "ecmaVersion": 2017
-    },
-    "env": {
+  },
+  "env": {
       "browser": true,
       "commonjs": true,
       "node": true,
       "es6": true
-    },
-    "rules": {
-      "no-duplicate-case": "error",
-      "no-empty": "error",
-      "no-extra-semi": "error",
+  },
+  "rules": {
+      "no-duplicate-case":"error",
+      "no-empty":"error",
+      "no-extra-semi":"error",
       "no-func-assign": "error",
       "no-irregular-whitespace": "error",
       "no-unreachable": "error",
