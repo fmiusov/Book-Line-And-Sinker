@@ -16,3 +16,5 @@ create table books (
   publisher varchar(255),
   primary key(bookId)
 );
+
+-- /* uncheck bookId when importing books.csv */ --
