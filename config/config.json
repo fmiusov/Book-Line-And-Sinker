@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "crescentfresh",
-    "database": "books_db",
+    "database": "goodreadsDb",
     "host": "127.0.0.1",
     "dialect": "mysql",
     "operatorsAliases": false
