@@ -10,6 +10,23 @@ var db = require("../models");
 const { Op } = db.Sequelize;
 var passport = require("../config/passport");
 
+// helper functions
+const authorRegexp = (author) => {
+  let temp;
+  let splitString = author.trim().split(/[\s\.]+/);
+  console.log(splitString);
+  temp = splitString.map((s) => {
+    if (s.length <= 3) {
+      // return `${s[0]}\.? *${s[1]}`;
+      return s.split(/\B/).join("\\.? *");
+    } else {
+      return s;
+    }
+  });
+  console.log(temp);
+  return temp.join("\\.? *");
+};
+
 // Routes
 // =============================================================
 module.exports = function (app) {
@@ -77,6 +94,23 @@ module.exports = function (app) {
         email: req.user.email,
         id: req.user.id,
       });
+  app.get("/api/books/author/search/:author", async (req, res) => {
+    try {
+      let author = authorRegexp(req.params.author);
+      let results = await db.Book.findAll({
+        where: {
+          authors: {
+            [Op.regexp]: author,
+          },
+        },
+        order: [
+          ["ratingsCount", "DESC"],
+          ["averageRating", "DESC"],
+        ],
+      });
+      res.json(results);
+    } catch (err) {
+      console.log(err);
     }
   });
 };
