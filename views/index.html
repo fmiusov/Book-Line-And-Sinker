@@ -12,6 +12,7 @@
       rel="stylesheet prefetch"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.css"
     />
+    <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./style.css" />
     <script
       defer
@@ -21,44 +22,36 @@
   <body>
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
-        <h1 class="brand-title">Book, Line, and Sinker</h1>
+        <h1 class="brand-title">Book, Line, & Sinker</h1>
         <!-- navbar items, navbar burger... -->
-        <div class="field is-grouped sch-bar">
-          <p class="control">
-            <input
-              class="input is-small"
-              type="text"
-              placeholder="Find a repository"
-            />
-          </p>
-          <p class="control">
-            <a class="button is-info is-small">
-              Search
-            </a>
-          </p>
-        </div>
+      </div>
+      <div class="field is-grouped is-pulled-right sch-bar">
+        <p class="control">
+          <input
+            class="input is-small"
+            type="text"
+            placeholder="Search"
+          />
+        </p>
+        <p class="control">
+          <a class="button is-small" id="srch-btn">
+            Search
+          </a>
+        </p>
       </div>
     </nav>
 
     <article class="panel is-info bar-two">
       <p class="panel-tabs">
-        <a href="">My Library</a>
-        <a href="">Explore</a>
-        <a href="">Reviews</a>
+        <a href="" class="bar-two-tabs">My Library</a>
+        <a href="" class="bar-two-tabs">Explore</a>
+        <a href="" class="bar-two-tabs">Reviews</a>
       </p>
     </article>
 
-    <section class="section">
-      <div class="container">
-        <h1 class="title">
-          Hello World
-        </h1>
-        <p class="subtitle">My first website with <strong>Bulma</strong>!</p>
-      </div>
-    </section>
 
     <!-- carousel -->
-    <div class="carousel is-5 carousel-animated carousel-animate-slide">
+    <div class="carousel is-3 carousel-animated carousel-animate-slide container">
       <div class="carousel-container">
         <div class="carousel-item is-active">
           <figure class="image is-2by1">
@@ -111,6 +104,18 @@
       </div>
     </div>
 
+    <section class="section rt-aside">
+      <h2> FILTER BOOKS BY</h2>
+        <h4 class="feature">Feature 1</h4>
+        <h4 class="feature">Feature 2</h4>
+        <h4 class="feature">Feature 3</h4>
+        <h4 class="feature">Feature 4</h4>
+        <h4 class="feature">Feature 5</h4>
+    </section>
+
+    <section class="book-preview">
+      <h2>BOOK PREVIEW</h2>
+    </section>
 
 
     
