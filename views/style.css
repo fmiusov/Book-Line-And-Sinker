@@ -1,12 +1,22 @@
 .navbar {
-    background-color: navy;
+    background-color: #0F0C30;
     color: white;
+    justify-content: space-between;
+}
+
+#srch-btn{
+    background-color: #E6AF39;
+    color: black;
+    border: none;
+    color: white;
+    font-weight: bold;
 }
 
 .brand-title {
     margin: 10px;
     font-weight: bold;
     font-size: 24px;
+    font-family: 'Girassol', cursive;
 }
 
 .sch-bar {
@@ -15,10 +25,20 @@
 
 .bar-two {
     margin: 5px;
+    background-color: #153144;
 }
+
+.bar-two-tabs {
+    color: white;
+    font-weight: bold;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .carousel {
   position: relative;
   overflow: hidden;
+  float: left;
 }
 .carousel .carousel-container {
   width: 100%;
@@ -265,4 +285,24 @@
 .carousel.carousel-animate-fade .carousel-item:not(.is-active),
 .hero-carousel.carousel-animate-fade .carousel-item:not(.is-active) {
   opacity: 0;
+}
+
+.rt-aside {
+    float: right;
+    background-color: lightgrey;
+}
+
+.feature {
+    margin: 5px;
+    font-weight: bold;
+    background: white;
+    padding: 5px;
+    border: black;
+}
+
+.book-preview {
+    margin: 5px;
+    font-weight: bold;
+    /* background: lightgrey; */
+    padding: 5px;
 }
