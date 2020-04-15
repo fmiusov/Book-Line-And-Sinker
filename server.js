@@ -18,20 +18,9 @@ var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-// Import routes and give the server access to them.
-// const catRoutes = require("./controllers/catsController.js");
-
-// app.use(catRoutes);
-
-app.get("/", function (req, res) {
-  res.render("index");
-});
-
-app.get("/api/config", function (req, res) {
-  res.json({
-    success: true,
-  });
-});
+// Routes
+require("./routes/api-routes.js")(app);
+// require("./routes/html-routes.js")(app);
 
 db.sequelize.sync().then(function () {
   app.listen(PORT, function () {

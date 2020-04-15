@@ -1,18 +1,20 @@
-drop database if exists goodreads_db;
-create database goodreads_db;
-use goodreads_db;
+drop database if exists goodreadsDb;
+create database goodreadsDb;
+use goodreadsDb;
 create table books (
-  bookID int not null,
+  bookId int not null,
   title varchar(255),
   authors varchar(255),
-  average_rating decimal,
+  averageRating int,
   isbn varchar(16),
   isbn13 varchar(16),
-  language_code varchar(16),
-  num_pages int,
-  ratings_count int,
-  text_reviews_count int,
-  publication_date date,
+  languageCode varchar(16),
+  numPages int,
+  ratingsCount int,
+  textReviewsCount int,
+  publicationDate date,
   publisher varchar(255),
-  primary key(bookID)
+  primary key(bookId)
 );
+
+-- /* uncheck bookId when importing books.csv */ --
