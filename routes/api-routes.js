@@ -94,6 +94,9 @@ module.exports = function (app) {
         email: req.user.email,
         id: req.user.id,
       });
+    }
+  });
+
   app.get("/api/books/author/search/:author", async (req, res) => {
     try {
       let author = authorRegexp(req.params.author);
