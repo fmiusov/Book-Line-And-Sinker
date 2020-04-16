@@ -4,30 +4,22 @@
 }
 
 #srch-btn {
-    background-color: orange;
-    color: black;
-    border: none;
-    color: white;
-    font-weight: bold;
+  background-color: orange;
+  color: black;
+  border: none;
+  color: white;
+  font-weight: bold;
 }
 
 #srch-bar {
   margin: 15px;
 }
 
-#review-submit {
-    background-color: orange;
-    color: black;
-    border: none;
-    color: white;
-    font-weight: bold;
-}
-
 .brand-title {
   margin: 10px;
   font-weight: bold;
   font-size: 24px;
-  font-family: 'Girassol', cursive;
+  font-family: "Girassol", cursive;
 }
 
 .sch-bar {
@@ -43,8 +35,6 @@
 .bar-two-tabs {
   color: white;
   font-weight: bold;
-  /* margin-left: 20px;
-  margin-right: 20px; */
 }
 
 .carousel {
@@ -318,40 +308,65 @@
 }
 
 .book-preview {
-    margin: 5px;
-    font-weight: bold;
-    /* background: lightgrey; */
-    padding: 5px;
+  margin: 5px;
+  font-weight: bold;
+  /* background: lightgrey; */
+  padding: 5px;
 }
 
 .checked {
-    color: orange;
-  }
+  color: orange;
+}
 
 #reviews {
-    text-align: center;
-    margin: 30px;
-    font-weight: bold;
-    font-size: 18px;
+  text-align: center;
+  margin: 30px;
+  font-weight: bold;
+  font-size: 16px;
+  padding: 5px;
 }
 
 .review-box {
-    border: 1px solid black;
-    padding: 10px;
+  border: 1px solid black;
+  padding: 10px;
 }
 
 .username {
-    font-size: 16px;
-    font-weight: bold;
-    color: #153144
+  font-size: 18px;
+  color: #153144;
+  font-weight: bolder;
 }
 
-.review-form {
-    margin-left: 8%;
-    margin-right: 8%;
+.review-form-section,
+.reviews-section {
+  margin-left: 5%;
+  margin-right: 5%;
 }
 
-.panel-review {
-    background-color: #0F0C30;
-    color: white;
+.review-card-head {
+  background-color: #0f0c30;
+  color: white;
+  font-size: 16px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.review-input {
+  margin: 5px;
+}
+
+#review-submit {
+  background-color: orange;
+  color: black;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.review-bar {
+  background-color: #0f0c30;
+  color: white;
 }
