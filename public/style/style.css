@@ -24,11 +24,11 @@
 }
 
 #review-submit {
-    background-color: orange;
-    color: black;
-    border: none;
-    color: white;
-    font-weight: bold;
+  background-color: orange;
+  color: black;
+  border: none;
+  color: white;
+  font-weight: bold;
 }
 
 .brand-title {
@@ -52,6 +52,10 @@
   color: white;
   font-weight: bold;
 }
+<<<<<<< HEAD
+.images {
+  margin: 10px;
+=======
 
 .carousel {
   position: relative;
@@ -400,4 +404,5 @@
 
 .or-link {
   margin-left: 20px;
+>>>>>>> f48e029bf132233ba867da91abacd9b6608ea871
 }
