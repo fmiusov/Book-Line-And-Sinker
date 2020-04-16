@@ -116,4 +116,7 @@ module.exports = function (app) {
       console.log(err);
     }
   });
+
+  // must be authenticated to add a book to your bookshelf
+  // app.post("/api/bookshelf/add")
 };
