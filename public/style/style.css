@@ -48,11 +48,17 @@
 }
 .section-size {
   margin: 10px;
+  margin-top: 50px;
 }
 .carousel {
-  /* background-color: black; */
+  /* background-color: rgb(223, 219, 219); */
+  height: 150px;
 }
-
+.side-section {
+  text-align: center;
+  background-color: rgb(223, 219, 219);
+  /* width: 300px; */
+}
 .rt-aside {
   float: right;
   background-color: lightgrey;
@@ -145,4 +151,8 @@ footer {
   font-size: 12px;
   color: rgb(58, 53, 53);
   background-position: center;
+}
+.slick-next,
+.slick-prev {
+  background-color:gray !important;
 }
