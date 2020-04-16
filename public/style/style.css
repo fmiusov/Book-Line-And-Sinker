@@ -15,6 +15,22 @@
   margin: 15px;
 }
 
+#account-btns {
+  margin: 15px;
+}
+
+#welcome-message {
+  margin: 15px;
+}
+
+#review-submit {
+    background-color: orange;
+    color: black;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
 .brand-title {
   margin: 10px;
   font-weight: bold;
