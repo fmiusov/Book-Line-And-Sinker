@@ -16,7 +16,6 @@
     ></script>
   </head>
   <body>
-
     <!-- NAVBAR -->
     <div class="w3-bar navbar">
       <a href="#" class="w3-bar-item w3-button brand-title"
@@ -27,15 +26,35 @@
         <a href="#" class="w3-bar-item w3-button" id="srch-btn">Search</a>
       </div>
       <div class="w3-right" id="account-btns">
-        <a href="/signup" class="w3-bar-item w3-button" id="signup-btn">Sign Up</a>
+        <a href="/signup" class="w3-bar-item w3-button" id="signup-btn"
+          >Sign Up</a
+        >
         <a href="/login" class="w3-bar-item w3-button" id="login-btn">Login</a>
+      </div>
+      <div class="w3-right" id="welcome-message">
+        <a href="/members" class="w3-bar-item w3-button">My Account <span class="member-name"></span></a>
       </div>
     </div>
 
     <article class="bar-two">
-        <a href="./index.html" class="w3-bar-item w3-button bar-two-tabs" style="width:33%">My Library</a>
-        <a href="./explore.html" class="w3-bar-item w3-button bar-two-tabs" style="width:33%">Explore</a>
-        <a href="./reviews.html" class="w3-bar-item w3-button bar-two-tabs" style="width:33%">Reviews</a>
+      <a
+        href="./index.html"
+        class="w3-bar-item w3-button bar-two-tabs"
+        style="width: 33%;"
+        >My Library</a
+      >
+      <a
+        href="./explore.html"
+        class="w3-bar-item w3-button bar-two-tabs"
+        style="width: 33%;"
+        >Explore</a
+      >
+      <a
+        href="./reviews.html"
+        class="w3-bar-item w3-button bar-two-tabs"
+        style="width: 33%;"
+        >Reviews</a
+      >
     </article>
 
     <!-- carousel -->
@@ -312,5 +331,7 @@
         });
       });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/members.js"></script>
   </body>
 </html>

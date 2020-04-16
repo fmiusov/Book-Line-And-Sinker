@@ -19,6 +19,10 @@
   margin: 15px;
 }
 
+#welcome-message {
+  margin: 15px;
+}
+
 #review-submit {
     background-color: orange;
     color: black;
