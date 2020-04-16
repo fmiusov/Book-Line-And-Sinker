@@ -46,6 +46,13 @@
 .images {
   margin: 10px;
 }
+.section-size {
+  margin: 10px;
+}
+.carousel {
+  /* background-color: black; */
+}
+
 .rt-aside {
   float: right;
   background-color: lightgrey;
@@ -123,4 +130,19 @@
 }
 .or-link {
   margin-left: 20px;
+}
+footer{
+    height: 40px;
+    width: 100%;
+    background-color: #0f0c30;
+    border-top: 1.3px solid white;
+    text-shadow: 0px 0px 5px black;
+    position: fixed;
+    bottom: 0;
+    text-align: center;
+    line-height: 20px;
+    letter-spacing: 12px;
+    font-size: 12px;
+    color: rgb(58, 53, 53);  
+    background-position: center;
 }
