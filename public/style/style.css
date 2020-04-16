@@ -1,11 +1,22 @@
 .navbar {
-    background-color: #0F0C30;
-    color: white;
-    justify-content: space-between;
+  background-color: #0f0c30;
+  color: white;
 }
 
-#srch-btn{
-    background-color: #E6AF39;
+#srch-btn {
+    background-color: orange;
+    color: black;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+#srch-bar {
+  margin: 15px;
+}
+
+#review-submit {
+    background-color: orange;
     color: black;
     border: none;
     color: white;
@@ -13,32 +24,35 @@
 }
 
 .brand-title {
-    margin: 10px;
-    font-weight: bold;
-    font-size: 24px;
-    font-family: 'Girassol', cursive;
+  margin: 10px;
+  font-weight: bold;
+  font-size: 24px;
+  font-family: 'Girassol', cursive;
 }
 
 .sch-bar {
-    margin: 15px;
+  margin: 15px;
 }
 
 .bar-two {
-    margin: 5px;
-    background-color: #153144;
+  margin: 10px;
+  margin-right: 10px;
+  background-color: #153144;
 }
 
 .bar-two-tabs {
-    color: white;
-    font-weight: bold;
-    margin-left: 20px;
-    margin-right: 20px;
+  color: white;
+  font-weight: bold;
+  /* margin-left: 20px;
+  margin-right: 20px; */
 }
 
 .carousel {
   position: relative;
   overflow: hidden;
   float: left;
+  /* background-image: url('https://i.pinimg.com/originals/54/20/1d/54201da4cd81a892f5738e79977c285d.jpg');
+  background-repeat: no-repeat; */
 }
 .carousel .carousel-container {
   width: 100%;
@@ -197,7 +211,10 @@
   position: relative;
   flex: 1 0 100%;
 }
-.hero-carousel .carousel-container .carousel-item.has-background .is-background {
+.hero-carousel
+  .carousel-container
+  .carousel-item.has-background
+  .is-background {
   object-fit: cover;
   object-position: center center;
   height: 100%;
@@ -288,16 +305,16 @@
 }
 
 .rt-aside {
-    float: right;
-    background-color: lightgrey;
+  float: right;
+  background-color: lightgrey;
 }
 
 .feature {
-    margin: 5px;
-    font-weight: bold;
-    background: white;
-    padding: 5px;
-    border: black;
+  margin: 5px;
+  font-weight: bold;
+  background: white;
+  padding: 5px;
+  border: black;
 }
 
 .book-preview {
@@ -305,4 +322,36 @@
     font-weight: bold;
     /* background: lightgrey; */
     padding: 5px;
+}
+
+.checked {
+    color: orange;
+  }
+
+#reviews {
+    text-align: center;
+    margin: 30px;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.review-box {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.username {
+    font-size: 16px;
+    font-weight: bold;
+    color: #153144
+}
+
+.review-form {
+    margin-left: 8%;
+    margin-right: 8%;
+}
+
+.panel-review {
+    background-color: #0F0C30;
+    color: white;
 }
