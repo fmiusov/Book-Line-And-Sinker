@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Book Line and Sinker</title>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link
       href="https://fonts.googleapis.com/css?family=Girassol&display=swap"
       rel="stylesheet"
@@ -17,22 +17,16 @@
   </head>
 
   <body>
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="navbar-brand">
-        <h1 class="brand-title">Book, Line, & Sinker</h1>
-        <!-- navbar items, navbar burger... -->
+
+    <!-- NAVBAR -->
+    <div class="w3-bar navbar">
+      <a href="#" class="w3-bar-item w3-button brand-title"
+        >Book, Line, & Sinker</a>
+      <div class="w3-right" id="srch-bar">
+        <input type="text" class="w3-bar-item w3-input" placeholder="Search" />
+        <a href="#" class="w3-bar-item w3-button" id="srch-btn">Search</a>
       </div>
-      <div class="field is-grouped is-pulled-right sch-bar">
-        <p class="control">
-          <input class="input is-small" type="text" placeholder="Search" />
-        </p>
-        <p class="control">
-          <a class="button is-small" id="srch-btn">
-            Search
-          </a>
-        </p>
-      </div>
-    </nav>
+    </div>
 
     <article class="panel is-info bar-two">
       <p class="panel-tabs">
@@ -195,67 +189,67 @@
       //Carousel
       var $jscomp = { scope: {} };
       $jscomp.defineProperty =
-        'function' == typeof Object.defineProperties
+        "function" == typeof Object.defineProperties
           ? Object.defineProperty
-          : function(a, b, c) {
+          : function (a, b, c) {
               if (c.get || c.set)
                 throw new TypeError(
-                  'ES3 does not support getters and setters.'
+                  "ES3 does not support getters and setters."
                 );
               a != Array.prototype && a != Object.prototype && (a[b] = c.value);
             };
-      $jscomp.getGlobal = function(a) {
-        return 'undefined' != typeof window && window === a
+      $jscomp.getGlobal = function (a) {
+        return "undefined" != typeof window && window === a
           ? a
-          : 'undefined' != typeof global && null != global
+          : "undefined" != typeof global && null != global
           ? global
           : a;
       };
       $jscomp.global = $jscomp.getGlobal(this);
-      $jscomp.SYMBOL_PREFIX = 'jscomp_symbol_';
-      $jscomp.initSymbol = function() {
-        $jscomp.initSymbol = function() {};
+      $jscomp.SYMBOL_PREFIX = "jscomp_symbol_";
+      $jscomp.initSymbol = function () {
+        $jscomp.initSymbol = function () {};
         $jscomp.global.Symbol || ($jscomp.global.Symbol = $jscomp.Symbol);
       };
       $jscomp.symbolCounter_ = 0;
-      $jscomp.Symbol = function(a) {
-        return $jscomp.SYMBOL_PREFIX + (a || '') + $jscomp.symbolCounter_++;
+      $jscomp.Symbol = function (a) {
+        return $jscomp.SYMBOL_PREFIX + (a || "") + $jscomp.symbolCounter_++;
       };
-      $jscomp.initSymbolIterator = function() {
+      $jscomp.initSymbolIterator = function () {
         $jscomp.initSymbol();
         var a = $jscomp.global.Symbol.iterator;
         a ||
           (a = $jscomp.global.Symbol.iterator = $jscomp.global.Symbol(
-            'iterator'
+            "iterator"
           ));
-        'function' != typeof Array.prototype[a] &&
+        "function" != typeof Array.prototype[a] &&
           $jscomp.defineProperty(Array.prototype, a, {
             configurable: !0,
             writable: !0,
-            value: function() {
+            value: function () {
               return $jscomp.arrayIterator(this);
-            }
+            },
           });
-        $jscomp.initSymbolIterator = function() {};
+        $jscomp.initSymbolIterator = function () {};
       };
-      $jscomp.arrayIterator = function(a) {
+      $jscomp.arrayIterator = function (a) {
         var b = 0;
-        return $jscomp.iteratorPrototype(function() {
+        return $jscomp.iteratorPrototype(function () {
           return b < a.length ? { done: !1, value: a[b++] } : { done: !0 };
         });
       };
-      $jscomp.iteratorPrototype = function(a) {
+      $jscomp.iteratorPrototype = function (a) {
         $jscomp.initSymbolIterator();
         a = { next: a };
-        a[$jscomp.global.Symbol.iterator] = function() {
+        a[$jscomp.global.Symbol.iterator] = function () {
           return this;
         };
         return a;
       };
-      $jscomp.polyfill = function(a, b, c, d) {
+      $jscomp.polyfill = function (a, b, c, d) {
         if (b) {
           c = $jscomp.global;
-          a = a.split('.');
+          a = a.split(".");
           for (d = 0; d < a.length - 1; d++) {
             var f = a[d];
             f in c || (c[f] = {});
@@ -269,26 +263,26 @@
             $jscomp.defineProperty(c, a, {
               configurable: !0,
               writable: !0,
-              value: b
+              value: b,
             });
         }
       };
       $jscomp.polyfill(
-        'Array.from',
-        function(a) {
+        "Array.from",
+        function (a) {
           return a
             ? a
-            : function(a, c, d) {
+            : function (a, c, d) {
                 $jscomp.initSymbolIterator();
                 c =
                   null != c
                     ? c
-                    : function(a) {
+                    : function (a) {
                         return a;
                       };
                 var b = [],
                   e = a[Symbol.iterator];
-                if ('function' == typeof e)
+                if ("function" == typeof e)
                   for (a = e.call(a); !(e = a.next()).done; )
                     b.push(c.call(d, e.value));
                 else
@@ -297,28 +291,28 @@
                 return b;
               };
         },
-        'es6-impl',
-        'es3'
+        "es6-impl",
+        "es3"
       );
-      var MOUSE_EVENTS = ['click', 'touchstart'],
-        Carousel = function(a) {
+      var MOUSE_EVENTS = ["click", "touchstart"],
+        Carousel = function (a) {
           this.element = a;
           this.init();
         };
-      Carousel.prototype.init = function() {
+      Carousel.prototype.init = function () {
         var a = this;
         this.items = Array.from(
-          this.element.querySelectorAll('.carousel-item')
+          this.element.querySelectorAll(".carousel-item")
         );
-        MOUSE_EVENTS.forEach(function(b) {
-          var c = a.element.querySelector('.carousel-nav-left'),
-            d = a.element.querySelector('.carousel-nav-right');
+        MOUSE_EVENTS.forEach(function (b) {
+          var c = a.element.querySelector(".carousel-nav-left"),
+            d = a.element.querySelector(".carousel-nav-right");
           c &&
             c.addEventListener(
               b,
-              function(b) {
+              function (b) {
                 b.preventDefault();
-                a.move('previous');
+                a.move("previous");
                 a.autoplayInterval &&
                   (clearInterval(a.autoplayInterval),
                   a.autoPlay(a.element.dataset.delay || 5e3));
@@ -328,9 +322,9 @@
           d &&
             d.addEventListener(
               b,
-              function(b) {
+              function (b) {
                 b.preventDefault();
-                a.move('next');
+                a.move("next");
                 a.autoplayInterval &&
                   (clearInterval(a.autoplayInterval),
                   a.autoPlay(a.element.dataset.delay || 5e3));
@@ -340,56 +334,56 @@
         });
         this.initOrder();
         this.element.dataset.autoplay &&
-          'true' == this.element.dataset.autoplay &&
+          "true" == this.element.dataset.autoplay &&
           this.autoPlay(this.element.dataset.delay || 5e3);
       };
-      Carousel.prototype.initOrder = function() {
-        var a = this.element.querySelector('.carousel-item.is-active');
+      Carousel.prototype.initOrder = function () {
+        var a = this.element.querySelector(".carousel-item.is-active");
         (a = this.items.indexOf(a))
           ? this.items.push(this.items.splice(0, a))
           : this.items.unshift(this.items.pop());
         this.setOrder();
       };
-      Carousel.prototype.setOrder = function() {
-        this.items.forEach(function(a, b) {
-          a.style['z-index'] = 1 !== b ? '0' : '1';
+      Carousel.prototype.setOrder = function () {
+        this.items.forEach(function (a, b) {
+          a.style["z-index"] = 1 !== b ? "0" : "1";
           a.style.order = b;
         });
       };
-      Carousel.prototype.move = function(a) {
-        a = void 0 === a ? 'next' : a;
+      Carousel.prototype.move = function (a) {
+        a = void 0 === a ? "next" : a;
         var b = this;
         this.items.length &&
           (this.element
-            .querySelector('.carousel-item.is-active')
-            .classList.remove('is-active'),
-          'previous' === a
+            .querySelector(".carousel-item.is-active")
+            .classList.remove("is-active"),
+          "previous" === a
             ? (this.items.unshift(this.items.pop()),
-              this.element.classList.add('is-reversing'))
+              this.element.classList.add("is-reversing"))
             : (this.items.push(this.items.shift()),
-              this.element.classList.remove('is-reversing')),
+              this.element.classList.remove("is-reversing")),
           (1 <= this.items.length
             ? this.items[1]
             : this.items[0]
-          ).classList.add('is-active'),
+          ).classList.add("is-active"),
           this.setOrder(),
-          this.element.classList.toggle('carousel-animated'),
-          setTimeout(function() {
-            b.element.classList.toggle('carousel-animated');
+          this.element.classList.toggle("carousel-animated"),
+          setTimeout(function () {
+            b.element.classList.toggle("carousel-animated");
           }, 50));
       };
-      Carousel.prototype.autoPlay = function(a) {
+      Carousel.prototype.autoPlay = function (a) {
         var b = this;
         this.autoplayInterval = setInterval(
-          function() {
-            b.move('next');
+          function () {
+            b.move("next");
           },
           void 0 === a ? 5e3 : a
         );
       };
-      document.addEventListener('DOMContentLoaded', function() {
-        var a = document.querySelectorAll('.carousel, .hero-carousel');
-        [].forEach.call(a, function(a) {
+      document.addEventListener("DOMContentLoaded", function () {
+        var a = document.querySelectorAll(".carousel, .hero-carousel");
+        [].forEach.call(a, function (a) {
           new Carousel(a);
         });
       });

@@ -1,7 +1,6 @@
 .navbar {
   background-color: #0f0c30;
   color: white;
-  justify-content: space-between;
 }
 
 #srch-btn {
@@ -10,6 +9,10 @@
     border: none;
     color: white;
     font-weight: bold;
+}
+
+#srch-bar {
+  margin: 15px;
 }
 
 #review-submit {
