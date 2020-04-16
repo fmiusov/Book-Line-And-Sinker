@@ -118,5 +118,54 @@ module.exports = function (app) {
   });
 
   // must be authenticated to add a book to your bookshelf
-  // app.post("/api/bookshelf/add")
+  // accepts: JSON object {"bookId": <book.id>}
+  app.post("/api/bookshelf/add", async (req, res) => {
+    try {
+      if (!req.user) {
+        res.status(401).json({
+          success: false,
+          msg: "You must be signed in to add a book to your library.",
+        });
+      } else {
+        console.log(req.user);
+        let { bookId } = req.body;
+        let book = await db.Book.findOne({
+          where: {
+            id: bookId,
+          },
+        });
+        let z = await book.addUser(req.user.id, {
+          through: {
+            rating: 0,
+            isRead: false
+          }
+        });
+        res.json(z);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  app.get("/api/bookshelf", async (req, res) => {
+    try {
+      if (!req.user) {
+        res.status(401).json({
+          success: false,
+          msg: "You must be signed in to add a book to your library.",
+        });
+      } else {
+        let user = await db.User.findOne({
+          where: {
+            id: req.user.id
+          },
+          include: db.Book
+        });
+        console.log(user);
+        res.json(user.Books);
+      }
+    } catch (err) {
+      console.log("error", err);
+    }
+  });
 };
