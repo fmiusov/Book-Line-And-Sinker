@@ -1,7 +1,6 @@
 .navbar {
   background-color: #0f0c30;
   color: white;
-  justify-content: space-between;
 }
 
 #srch-btn {
@@ -10,6 +9,10 @@
     border: none;
     color: white;
     font-weight: bold;
+}
+
+#srch-bar {
+  margin: 15px;
 }
 
 #review-submit {
@@ -32,15 +35,16 @@
 }
 
 .bar-two {
-  margin: 5px;
+  margin: 10px;
+  margin-right: 10px;
   background-color: #153144;
 }
 
 .bar-two-tabs {
   color: white;
   font-weight: bold;
-  margin-left: 20px;
-  margin-right: 20px;
+  /* margin-left: 20px;
+  margin-right: 20px; */
 }
 
 .carousel {
