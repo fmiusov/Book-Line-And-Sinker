@@ -1,44 +1,46 @@
 .navbar {
-    background-color: #0F0C30;
-    color: white;
-    justify-content: space-between;
+  background-color: #0f0c30;
+  color: white;
+  justify-content: space-between;
 }
 
-#srch-btn{
-    background-color: #E6AF39;
-    color: black;
-    border: none;
-    color: white;
-    font-weight: bold;
+#srch-btn {
+  background-color: #e6af39;
+  color: black;
+  border: none;
+  color: white;
+  font-weight: bold;
 }
 
 .brand-title {
-    margin: 10px;
-    font-weight: bold;
-    font-size: 24px;
-    font-family: 'Girassol', cursive;
+  margin: 10px;
+  font-weight: bold;
+  font-size: 24px;
+  font-family: 'Girassol', cursive;
 }
 
 .sch-bar {
-    margin: 15px;
+  margin: 15px;
 }
 
 .bar-two {
-    margin: 5px;
-    background-color: #153144;
+  margin: 5px;
+  background-color: #153144;
 }
 
 .bar-two-tabs {
-    color: white;
-    font-weight: bold;
-    margin-left: 20px;
-    margin-right: 20px;
+  color: white;
+  font-weight: bold;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .carousel {
   position: relative;
   overflow: hidden;
   float: left;
+  /* background-image: url('https://i.pinimg.com/originals/54/20/1d/54201da4cd81a892f5738e79977c285d.jpg');
+  background-repeat: no-repeat; */
 }
 .carousel .carousel-container {
   width: 100%;
@@ -197,7 +199,10 @@
   position: relative;
   flex: 1 0 100%;
 }
-.hero-carousel .carousel-container .carousel-item.has-background .is-background {
+.hero-carousel
+  .carousel-container
+  .carousel-item.has-background
+  .is-background {
   object-fit: cover;
   object-position: center center;
   height: 100%;
@@ -288,21 +293,25 @@
 }
 
 .rt-aside {
-    float: right;
-    background-color: lightgrey;
+  float: right;
+  background-color: lightgrey;
 }
 
 .feature {
-    margin: 5px;
-    font-weight: bold;
-    background: white;
-    padding: 5px;
-    border: black;
+  margin: 5px;
+  font-weight: bold;
+  background: white;
+  padding: 5px;
+  border: black;
 }
 
 .book-preview {
-    margin: 5px;
-    font-weight: bold;
-    /* background: lightgrey; */
-    padding: 5px;
+  margin: 5px;
+  font-weight: bold;
+  /* background: lightgrey; */
+  padding: 5px;
+}
+
+.margin-top-0 {
+  margin-top: 0px !important;
 }
