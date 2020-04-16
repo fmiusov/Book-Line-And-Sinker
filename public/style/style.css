@@ -370,3 +370,18 @@
   background-color: #0f0c30;
   color: white;
 }
+
+#login-submit {
+  background-color: orange;
+  color: black;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin-left: 5px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.or-link {
+  margin-left: 20px;
+}

@@ -1,49 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Book Line and Sinker Reviews</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Girassol&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style/style.css" />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </head>
 
-<head>
-  <title>Passport Authentication</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
-  <link href="stylesheets/style.css" rel="stylesheet">
-</head>
-
-<body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
+  <body>
+    <!-- NAVBAR -->
+    <div class="w3-bar navbar">
+      <a href="./index.html" class="w3-bar-item w3-button brand-title"
+        >Book, Line, & Sinker</a
+      >
+      <div class="w3-right" id="srch-bar">
+        <input type="text" class="w3-bar-item w3-input" placeholder="Search" />
+        <a href="#" class="w3-bar-item w3-button" id="srch-btn">Search</a>
       </div>
     </div>
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Sign Up Form</h2>
-        <form class="signup">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="email-input" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="password-input" placeholder="Password">
-          </div>
-          <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+
+    <!-- NAVBAR TWO -->
+    <article class="bar-two">
+      <a
+        href="./index.html"
+        class="w3-bar-item w3-button bar-two-tabs"
+        style="width: 33%;"
+        >My Library</a
+      >
+      <a
+        href="./explore.html"
+        class="w3-bar-item w3-button bar-two-tabs"
+        style="width: 33%;"
+        >Explore</a
+      >
+      <a
+        href="./reviews.html"
+        class="w3-bar-item w3-button bar-two-tabs"
+        style="width: 33%;"
+        >Reviews</a
+      >
+    </article>
+
+    <!-- SIGNUP FORM -->
+    <section class="review-form-section">
+      <div class="w3-card-4">
+        <div class="w3-container review-card-head">
+          <h4>Sign up</h4>
+        </div>
+
+        <form class="w3-container signup">
+          <label class="w3-text review-input"><b>Email address: </b></label>
+          <input
+            class="w3-input w3-border w3-light-grey form-control review-input"
+            type="email"
+            id="email-input"
+            placeholder="Email"
+          />
+
+          <label class="w3-text review-input"><b>Password: </b></label>
+          <input
+            class="w3-input w3-border w3-light-grey form-control review-input"
+            type="password"
+            id="password-input"
+            placeholder="Password"
+          />
+          <div
+            style="display: none;"
+            id="alert"
+            class="alert alert-danger"
+            role="alert"
+          >
+            <span
+              class="glyphicon glyphicon-exclamation-sign"
+              aria-hidden="true"
+            ></span>
             <span class="sr-only">Error:</span> <span class="msg"></span>
           </div>
-          <button type="submit" class="btn btn-default">Sign Up</button>
+          <button class="w3-btn" type="submit" id="login-submit">Sign up</button>
         </form>
+        <div class="or-link">
+          <p>Or login <a href="./login.html">here</a></p>
+        </div>
         <br />
-        <p>Or log in <a href="/login">here</a></p>
       </div>
-    </div>
-  </div>
+    </section>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="js/signup.js"></script>
-
-</body>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/signup.js"></script>
+  </body>
 </html>
