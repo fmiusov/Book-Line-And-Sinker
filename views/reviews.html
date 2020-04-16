@@ -49,16 +49,16 @@
     </article>
 
     <section class="container reviews is is-grouped">
-      <article class="panel">
+      <article class="panel panel-review">
         <p id="reviews">Reviews</p>
       </article>
       <div class="review-box">
         <h3 class="username">Username:</h3>
         <h3 class="username">Review:</h3>
         <p class="userreview">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-          do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-          ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat. Duis aute irure dolor in
           reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
@@ -74,6 +74,67 @@
         <span class="fa fa-star checked"></span>
         <span class="fa fa-star"></span>
         <span class="fa fa-star"></span>
+      </div>
+    </section>
+<br>
+    <section class="review-form">
+        <article class="panel panel-review">
+            <p id="reviews">Submit your book review</p>
+          </article>
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Text input" />
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Username</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="text"
+            placeholder="Text input"
+            value="username"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-user"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <!-- <i class="fas fa-check"></i> -->
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control has-icons-left has-icons-right">
+          <input
+            class="input"
+            type="email"
+            placeholder="Email input"
+            value="email"
+          />
+          <span class="icon is-small is-left">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <span class="icon is-small is-right">
+            <!-- <i class="fas fa-exclamation-triangle"></i> -->
+          </span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="label">Review</label>
+        <div class="control">
+          <textarea class="textarea" placeholder="Enter review here"></textarea>
+        </div>
+      </div>
+
+      <div class="field is-grouped">
+        <div class="control">
+          <button class="button" id="review-submit">Submit</button>
+        </div>
       </div>
     </section>
 

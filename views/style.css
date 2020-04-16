@@ -4,8 +4,16 @@
     justify-content: space-between;
 }
 
-#srch-btn{
-    background-color: #E6AF39;
+#srch-btn {
+    background-color: orange;
+    color: black;
+    border: none;
+    color: white;
+    font-weight: bold;
+}
+
+#review-submit {
+    background-color: orange;
     color: black;
     border: none;
     color: white;
@@ -313,7 +321,7 @@
 
 #reviews {
     text-align: center;
-    margin: 10px;
+    margin: 30px;
     font-weight: bold;
     font-size: 18px;
 }
@@ -326,4 +334,15 @@
 .username {
     font-size: 16px;
     font-weight: bold;
+    color: #153144
+}
+
+.review-form {
+    margin-left: 8%;
+    margin-right: 8%;
+}
+
+.panel-review {
+    background-color: #0F0C30;
+    color: white;
 }
