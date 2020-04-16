@@ -39,7 +39,7 @@ module.exports = db;
 // -[]\/Carousel
 
 0
-'
+
 
 var $jscomp = { scope: {} };
 $jscomp.defineProperty =
