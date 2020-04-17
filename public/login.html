@@ -22,20 +22,28 @@
       <a href="/" class="w3-bar-item w3-button brand-title"
         >Book, Line, & Sinker</a
       >
-      
+
       <div class="w3-right" id="srch-bar">
         <a href="/" class="w3-bar-item w3-button" id="logout-btn">Logout</a>
+        <input
+          class="w3-radio"
+          type="radio"
+          name="search-type"
+          value="author"
+          checked
+        />
+        <label>Author</label>
+        <input class="w3-radio" type="radio" name="search-type" value="title" />
+        <label>Title</label>
         <input type="text" class="w3-bar-item w3-input" placeholder="Search" />
         <a href="#" class="w3-bar-item w3-button" id="srch-btn">Search</a>
+        
       </div>
     </div>
 
     <!-- NAVBAR TWO -->
     <article class="bar-two">
-      <a
-        href="/"
-        class="w3-bar-item w3-button bar-two-tabs"
-        style="width: 33%;"
+      <a href="/" class="w3-bar-item w3-button bar-two-tabs" style="width: 33%;"
         >My Library</a
       >
       <a
@@ -82,7 +90,6 @@
           <p>Or sign up <a href="/signup">here</a></p>
         </div>
         <br />
-
       </div>
     </section>
 
