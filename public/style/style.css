@@ -37,7 +37,8 @@
 .bar-two {
   margin: 10px;
   margin-right: 10px;
-  background-color: #153144;
+  background-color: #878b8d;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .bar-two-tabs {
   color: white;
@@ -45,6 +46,10 @@
 }
 .images {
   margin: 10px;
+}
+.section-size {
+  margin: 10px;
+  margin-top: 50px;
 }
 .rt-aside {
   float: right;
@@ -123,4 +128,35 @@
 }
 .or-link {
   margin-left: 20px;
+}
+footer {
+  height: 40px;
+  width: 100%;
+  background-color: #0f0c30;
+  border-top: 1.3px solid white;
+  text-shadow: 0px 0px 5px black;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  line-height: 20px;
+  letter-spacing: 12px;
+  font-size: 12px;
+  color: orange;
+  background-position: center;
+}
+.slick-next {
+  background-color: white;
+  margin-right: 20px;
+}
+.slick-prev {
+  background-color: white;
+  margin-left: 20px;
+}
+.last-section {
+  padding-bottom: 80px;
+  background-color: rgb(247, 244, 244);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.orangeText {
+  color: orange;
 }
