@@ -244,8 +244,20 @@
         });
       });
     </script>
+
+    <!-- AJAX CALL TESTING -->
     <script>
-      
+var queryURL = "https://www.goodreads.com/api/author_url/“ + author + “&api_key=xf4JIPWIA2y1i6oGjFHmAQ";
+   
+
+   $.ajax({
+     url: queryURL,
+     method: "GET"
+   }).then(function(response) {
+     console.log(response);
+
+   });
+
     </script>
   </body>
 </html>
