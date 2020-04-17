@@ -43,15 +43,15 @@
           >My Account <span class="member-name"></span
         ></a>
         <input
-        class="w3-radio"
-        type="radio"
-        name="search-type"
-        value="author"
-        checked
-      />
-      <label>Author</label>
-      <input class="w3-radio" type="radio" name="search-type" value="title" />
-      <label>Title</label>
+          class="w3-radio"
+          type="radio"
+          name="search-type"
+          value="author"
+          checked
+        />
+        <label>Author</label>
+        <input class="w3-radio" type="radio" name="search-type" value="title" />
+        <label>Title</label>
         <input type="text" class="w3-bar-item w3-input" placeholder="Search" />
         <a href="#" class="w3-bar-item w3-button" id="srch-btn">Search</a>
       </div>
@@ -180,13 +180,13 @@
       <!-- side section -->
       <div class="w3-quarter side-section">
         <!-- <div class="w3-container w3-cell w3-cell side-section"> -->
-          <h4>Search by</h4>
-        <p>Non</p>
-        <p>Biography</p>
-        <p>History</p>
-        <p>Feature 4</p>
-        <p>Feature 5</p>
-        <p>Feature 6</p>
+        <h4 id="category-head">View by category</h4>
+        <p class="book-category">Biography</p>
+        <p class="book-category">Cooking</p>
+        <p class="book-category">Fiction</p>
+        <p class="book-category">History</p>
+        <p class="book-category">News</p>
+        <p class="book-category">Self-help</p>
       </div>
     </div>
 
@@ -236,28 +236,13 @@
 
     <!-- Carousel JS -->
     <script type="text/javascript">
-      $(document).ready(function() {
-        $('.autoplay').slick({
+      $(document).ready(function () {
+        $(".autoplay").slick({
           infinite: true,
           slidesToShow: 3,
-          slidesToScroll: 1
+          slidesToScroll: 1,
         });
       });
-    </script>
-
-    <!-- AJAX CALL TESTING -->
-    <script>
-var queryURL = "https://www.goodreads.com/api/author_url/“ + author + “&api_key=xf4JIPWIA2y1i6oGjFHmAQ";
-   
-
-   $.ajax({
-     url: queryURL,
-     method: "GET"
-   }).then(function(response) {
-     console.log(response);
-
-   });
-
     </script>
   </body>
 </html>

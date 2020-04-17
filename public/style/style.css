@@ -192,3 +192,8 @@ footer {
   background:#F90;
   color:#FFF;
 }
+
+.book-category, #category-head {
+  font-weight: bolder;
+  text-align: right;
+}
