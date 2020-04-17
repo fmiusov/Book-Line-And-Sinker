@@ -1,7 +1,7 @@
 {
-  "name": "eslint-example",
+  "name": "Book-Line-And-Sinker",
   "version": "1.0.0",
-  "description": "Eslint Example",
+  "description": "Bootcamp Project 2",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -29,7 +29,7 @@
     "url": "git+https://github.com/fmiusov/project2.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jayson Duff, Jolie Guerra, Zack Hayden, Stephanie Smith",
   "bugs": {
     "url": "https://github.com/fmiusov/project2/issues"
   },
