@@ -12,28 +12,34 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function (app) {
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
-
   app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
-
+  app.get("/explore", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/explore.html"));
+  });
+  app.get("/reviews", function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/reviews.html"));
+  });
   app.get("/login", function (req, res) {
-    // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/");
     }
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
   app.get("/signup", function (req, res) {
-    // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/");
     }
     res.sendFile(path.join(__dirname, "../public/signup.html"));
   });
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be redirected to the signup page
   app.get("/members", isAuthenticated, function (req, res) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
+  });
+  app.get("/explore", isAuthenticated, function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/explore.html"));
+  });
+  app.get("/reviews", isAuthenticated, function (req, res) {
+    res.sendFile(path.join(__dirname, "../public/reviews.html"));
   });
 };
