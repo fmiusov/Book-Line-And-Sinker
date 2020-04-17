@@ -6,9 +6,9 @@
 // =============================================================
 
 // Requiring our Todo model
-var db = require("../models");
+const db = require("../models");
 const { Op } = db.Sequelize;
-var passport = require("../config/passport");
+const passport = require("../config/passport");
 
 // helper functions
 const authorRegexp = (author) => {
@@ -141,11 +141,14 @@ module.exports = function (app) {
             review: null
           },
         });
-        if (result) {
+        if (result[0]) {
           res.json({
             success: true,
             msg: "Book added",
-            data: result,
+            data: {
+              book: book,
+              userBook: result[0]
+            }
           });
         } else {
           res.json({
