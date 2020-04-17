@@ -38,7 +38,7 @@
   margin: 10px;
   margin-right: 10px;
   background-color: #878b8d;
-  font-family: Verdana, Geneva, Tahoma, sans-serif
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .bar-two-tabs {
   color: white;
@@ -155,7 +155,7 @@ footer {
 .last-section {
   padding-bottom: 80px;
   background-color: rgb(247, 244, 244);
-  font-family: Verdana, Geneva, Tahoma, sans-serif
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .orangeText {
   color: orange;
