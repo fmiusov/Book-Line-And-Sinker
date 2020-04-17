@@ -138,7 +138,7 @@ module.exports = function (app) {
           through: {
             rating: 0,
             isRead: false,
-            review: null
+            review: null,
           },
         });
         if (result[0]) {
@@ -147,8 +147,8 @@ module.exports = function (app) {
             msg: "Book added",
             data: {
               book: book,
-              userBook: result[0]
-            }
+              userBook: result[0],
+            },
           });
         } else {
           res.json({
@@ -306,13 +306,32 @@ module.exports = function (app) {
           where: {
             userId: req.user.id,
             review: {
-              [Op.ne]: null
-            }
+              [Op.ne]: null,
+            },
           },
           include: db.Book,
         });
-        if (reviews) {
-          res.json(reviews);
+        let output = reviews.map((r) => ({
+          reviewId: r.id,
+          rating: r.rating,
+          review: r.review,
+          isRead: r.isRead,
+          createdAt: r.createdAt,
+          updatedAt: r.updatedAt,
+          book: {
+            bookId: r.Book.id,
+            title: r.Book.title,
+            author: r.Book.authors,
+            averageRating: r.Book.averageRating,
+            isbn: r.Book.isbn,
+            isbn13: r.Book.isbn13,
+            numPages: r.Book.numPages,
+            publicationDate: r.Book.publicationDate,
+            publisher: r.Book.publisher,
+          },
+        }));
+        if (output) {
+          res.json(output);
         }
       }
     } catch (err) {
@@ -341,15 +360,111 @@ module.exports = function (app) {
             id: req.user.id,
           },
           include: db.Book,
-          // include: {
-          //   model: db.UserBooks,
-          //   where: {
-          //     userId: req.user.id
-          //   }
-          // },
         });
         console.log(result);
-        res.json(result.Books);
+        let output = result.Books.map((r) => ({
+          bookId: r.id,
+          title: r.title,
+          author: r.authors,
+          averageRating: r.averageRating,
+          isbn: r.isbn,
+          isbn13: r.isbn13,
+          languageCode: r.languageCode,
+          numPages: r.numPages,
+          publicationDate: r.publicationDate,
+          publisher: r.publisher,
+          createdAt: r.createdAt,
+          updatedAt: r.updatedAt,
+          isRead: r.UserBooks.isRead,
+          review: {
+            id: r.UserBooks.id,
+            rating: r.UserBooks.rating,
+            review: r.UserBooks.review,
+          },
+        }));
+        console.log(result);
+        res.json(output);
+      }
+    } catch (err) {
+      console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
+    }
+  });
+
+  app.get("/api/:bookId/reviews", async (req, res) => {
+    try {
+      if (!req.user) {
+        res.status(401).json({
+          success: false,
+          msg: "You must be signed in to access this resource.",
+        });
+      } else {
+        let result = await db.UserBooks.findOne({
+          include: db.Book,
+          where: {
+            bookId: req.params.bookId,
+            userId: req.user.id
+          },
+        });
+        let results = await db.UserBooks.findAll({
+          include: db.Book,
+          where: {
+            bookId: req.params.bookId,
+            userId: {
+              [Op.ne]: req.user.id
+            }
+          }
+        });
+        console.log(result.Book);
+        let myReview = {
+          reviewId: result.id,
+          rating: result.rating,
+          review: result.review,
+          isRead: result.isRead,
+          createdAt: result.createdAt,
+          updatedAt: result.updatedAt,
+          book: {
+            bookId: result.Book.id,
+            title: result.Book.title,
+            author: result.Book.authors,
+            averageRating: result.Book.averageRating,
+            isbn: result.Book.isbn,
+            isbn13: result.Book.isbn13,
+            numPages: result.Book.numPages,
+            publicationDate: result.Book.publicationDate,
+            publisher: result.Book.publisher,
+          },
+        };
+        let otherReviews = results.map((r) => ({
+          reviewId: r.id,
+          rating: r.rating,
+          review: r.review,
+          isRead: r.isRead,
+          createdAt: r.createdAt,
+          updatedAt: r.updatedAt,
+          book: {
+            bookId: r.Book.id,
+            title: r.Book.title,
+            author: r.Book.authors,
+            averageRating: r.Book.averageRating,
+            isbn: r.Book.isbn,
+            isbn13: r.Book.isbn13,
+            numPages: r.Book.numPages,
+            publicationDate: r.Book.publicationDate,
+            publisher: r.Book.publisher,
+          },
+        }));
+        res.json({
+          userReview: myReview,
+          otherReviews: otherReviews
+        });
       }
     } catch (err) {
       console.log("error", err);
