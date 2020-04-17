@@ -50,14 +50,20 @@
   margin: 10px;
   margin-top: 50px;
 }
-.carousel {
+.carousel-1 {
   /* background-color: rgb(223, 219, 219); */
-  height: 150px;
+}
+.carousel-2 {
+  /* background-color: rgb(223, 219, 219); */
+  /* height: 120px; */
 }
 .side-section {
-  text-align: center;
-  background-color: rgb(223, 219, 219);
-  /* width: 300px; */
+  /* text-align: center; */
+  /* background-color: black; */
+  /* height: 500px; */
+  /* width: 120px; */
+  /* margin-right: 40px; */
+  /* margin-left: 55px; */
 }
 .rt-aside {
   float: right;
@@ -152,7 +158,14 @@ footer {
   color: rgb(58, 53, 53);
   background-position: center;
 }
-.slick-next,
+.slick-next {
+  background-color: white;
+  margin-right: 20px;
+}
 .slick-prev {
-  background-color:gray !important;
+  background-color: white;
+  margin-left: 20px;
+}
+.last-section {
+  padding-bottom: 80px;
 }
