@@ -42,6 +42,16 @@
         <a href="/members" class="w3-bar-item w3-button"
           >My Account <span class="member-name"></span
         ></a>
+        <input
+        class="w3-radio"
+        type="radio"
+        name="search-type"
+        value="author"
+        checked
+      />
+      <label>Author</label>
+      <input class="w3-radio" type="radio" name="search-type" value="title" />
+      <label>Title</label>
         <input type="text" class="w3-bar-item w3-input" placeholder="Search" />
         <a href="#" class="w3-bar-item w3-button" id="srch-btn">Search</a>
       </div>
@@ -51,19 +61,19 @@
       <a
         href="./index.html"
         class="w3-bar-item w3-button bar-two-tabs"
-        style="width: 33%;"
+        style="width: 30%;"
         >My Library</a
       >
       <a
         href="./explore.html"
         class="w3-bar-item w3-button bar-two-tabs"
-        style="width: 33%;"
+        style="width: 30%;"
         >Explore</a
       >
       <a
         href="./reviews.html"
         class="w3-bar-item w3-button bar-two-tabs"
-        style="width: 33%;"
+        style="width: 30%;"
         >Reviews</a
       >
     </article>
@@ -170,9 +180,10 @@
       <!-- side section -->
       <div class="w3-quarter side-section">
         <!-- <div class="w3-container w3-cell w3-cell side-section"> -->
-        <p>Feature 1</p>
-        <p>Feature 2</p>
-        <p>Feature 3</p>
+          <h4>Search by</h4>
+        <p>Non</p>
+        <p>Biography</p>
+        <p>History</p>
         <p>Feature 4</p>
         <p>Feature 5</p>
         <p>Feature 6</p>
@@ -232,6 +243,9 @@
           slidesToScroll: 1
         });
       });
+    </script>
+    <script>
+      
     </script>
   </body>
 </html>
