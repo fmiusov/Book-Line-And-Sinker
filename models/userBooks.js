@@ -33,6 +33,6 @@ module.exports = (sequelize, DataTypes) => {
   UserBooks.associate = (models) => {
     UserBooks.belongsTo(models.Book, {foreignKey: "bookId", targetKey: "id"});
     UserBooks.belongsTo(models.User, {foreignKey: "userId", targetKey: "id"});
-  }
+  };
   return UserBooks;
 };
