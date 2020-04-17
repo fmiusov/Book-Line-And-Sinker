@@ -1,7 +1,7 @@
 {
-  "name": "eslint-example",
+  "name": "Book-Line-And-Sinker",
   "version": "1.0.0",
-  "description": "Eslint Example",
+  "description": "Bootcamp Project 2",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -22,14 +22,15 @@
     "mysql2": "^2.1.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "sequelize": "^5.21.6"
+    "sequelize": "^5.21.6",
+    "minimist": ">=0.2.1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fmiusov/project2.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Jayson Duff, Jolie Guerra, Zack Hayden, Stephanie Smith",
   "bugs": {
     "url": "https://github.com/fmiusov/project2/issues"
   },

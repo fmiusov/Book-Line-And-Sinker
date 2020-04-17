@@ -1,14 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Book Line and Sinker</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link href="https://fonts.googleapis.com/css?family=Girassol&display=swap" rel="stylesheet" />
+  <!-- Add the slick-theme.css if you want default styling -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <!-- Add the slick-theme.css if you want default styling -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+  <link rel="stylesheet" href="./style/style.css" />
+  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 
 <body>
-    {{{ body }}}
+  <!-- NAVBAR -->
+  <div class="w3-bar navbar">
+    <a href="#" class="w3-bar-item w3-button brand-title">Book, Line <span class="orangeText">&</span> Sinker</a>
+
+    <div class="w3-right" id="srch-bar">
+      <a href="/signup" class="w3-bar-item w3-button" id="signup-btn">Sign Up</a>
+      <a href="/login" class="w3-bar-item w3-button" id="login-btn">Login</a>
+      <a href="/members" class="w3-bar-item w3-button">My Account <span class="member-name"></span></a>
+      <input class="w3-radio" type="radio" name="search-type" value="author" checked />
+      <label>Author</label>
+      <input class="w3-radio" type="radio" name="search-type" value="title" />
+      <label>Title</label>
+      <input type="text" class="w3-bar-item w3-input" placeholder="Search" />
+      <a href="#" class="w3-bar-item w3-button" id="srch-btn">Search</a>
+    </div>
+  </div>
+
+  <article class="bar-two">
+    <a href="./index.html" class="w3-bar-item w3-button bar-two-tabs" style="width: 30%;">My Library</a>
+    <a href="./explore.html" class="w3-bar-item w3-button bar-two-tabs" style="width: 30%;">Explore</a>
+    <a href="./reviews.html" class="w3-bar-item w3-button bar-two-tabs" style="width: 30%;">Reviews</a>
+  </article>
+
+{{{body}}}
+
+  <!-- footer -->
+    <footer>©Copyright BLS LLC</footer>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 </body>
 
 </html>

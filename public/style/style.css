@@ -47,16 +47,15 @@
 .images {
   margin: 10px;
 }
-.section-size {
-  margin: 10px;
-  margin-top: 50px;
-}
-.rt-aside {
+
+.side-section {
   float: right;
-  background-color: lightgrey;
+  background-color: rgb(247, 244, 244);
+  margin-top: 10px;
+  
 }
 .feature {
-  margin: 5px;
+  margin: 8px;
   font-weight: bold;
   background: white;
   padding: 5px;
@@ -139,10 +138,11 @@ footer {
   bottom: 0;
   text-align: center;
   line-height: 20px;
-  letter-spacing: 12px;
+  letter-spacing: 10px;
   font-size: 12px;
-  color: orange;
+  color: lightgrey;
   background-position: center;
+  padding-top: 10px;
 }
 .slick-next {
   background-color: white;
@@ -159,4 +159,47 @@ footer {
 }
 .orangeText {
   color: orange;
+}
+
+.rating {
+  float:left;
+  width:300px;
+}
+.rating span { float:right; position:relative; }
+.rating span input {
+  position:absolute;
+  top:0px;
+  left:0px;
+  opacity:0;
+}
+.rating span label {
+  display:inline-block;
+  width:30px;
+  height:30px;
+  text-align:center;
+  color:#FFF;
+  background:#ccc;
+  font-size:30px;
+  margin-right:2px;
+  line-height:30px;
+  border-radius:50%;
+  -webkit-border-radius:50%;
+}
+.rating span:hover ~ span label,
+.rating span:hover label,
+.rating span.checked label,
+.rating span.checked ~ span label {
+  background:#F90;
+  color:#FFF;
+}
+
+.book-category, #category-head {
+
+  text-align: right;
+  padding-right: 10px;
+}
+
+#category-head {
+  color: #153144;
+  font-weight: bolder;
 }

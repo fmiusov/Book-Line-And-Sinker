@@ -27,3 +27,4 @@ returns success/fail object with the review in the `data` field
 ## GET: /api/reviews
 returns all reviews by the authenticated user
 
+readme change for heroku
