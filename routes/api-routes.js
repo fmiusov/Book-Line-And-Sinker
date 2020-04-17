@@ -124,7 +124,7 @@ module.exports = function (app) {
       if (!req.user) {
         res.status(401).json({
           success: false,
-          msg: "You must be signed in to add a book to your library.",
+          msg: "You must be signed in to access this resource.",
         });
       } else {
         console.log(req.user);
@@ -134,16 +134,182 @@ module.exports = function (app) {
             id: bookId,
           },
         });
-        let z = await book.addUser(req.user.id, {
+        let result = await book.addUser(req.user.id, {
           through: {
             rating: 0,
-            isRead: false
-          }
+            isRead: false,
+          },
         });
-        res.json(z);
+        if (result) {
+          res.json({
+            success: true,
+            msg: "Book added",
+            data: result,
+          });
+        } else {
+          res.json({
+            success: false,
+            msg: "Book not added",
+            data: result
+          });
+        }
       }
     } catch (err) {
       console.log(err);
+    }
+  });
+
+  app.get("/api/review/:bookId", async (req, res) => {
+    try {
+      let bookId = req.params.bookId;
+      let result = await db.UserBooks.findOne({
+        where: {
+          userId: req.user.id,
+          bookId: bookId,
+        },
+      });
+      if (result) {
+        res.json({
+          success: true,
+          msg: "Review found",
+          data: result
+        });
+      } else {
+        res.status(401).json({
+          success: false,
+          msg: "No reviews",
+          data: result
+        });
+      }
+    } catch (err) {
+      console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
+    }
+  });
+
+  // acceps JSON object { "bookId": <book.id>, "rating": <1 - 5>}
+  app.post("/api/rating", async (req, res) => {
+    try {
+      if (!req.user) {
+        res.status(401).json({
+          success: false,
+          msg: "You must be signed in to access this resource.",
+        });
+      } else {
+        let userBook = await db.UserBooks.update(
+          {
+            rating: req.body.rating,
+          },
+          {
+            where: {
+              bookId: req.body.bookId,
+              userId: req.user.id,
+            },
+          }
+        );
+        if (userBook) {
+          res.json({
+            succes: true,
+            msg: `Rating set to ${userBook.rating}`,
+            data: userBook,
+          });
+        } else {
+          res.status(204).end();
+        }
+      }
+    } catch (err) {
+      console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
+    }
+  });
+
+  // acceps JSON object { "bookId": <book.id>, "rating": <1 - 5>, review: <text>}
+  app.post("/api/review", async (req, res) => {
+    try {
+      if (!req.user) {
+        res.status(401).json({
+          success: false,
+          msg: "You must be signed in to access this resource.",
+        });
+      } else {
+        let userBook = await db.UserBooks.update(
+          {
+            rating: req.body.rating,
+            review: req.body.review,
+          },
+          {
+            where: {
+              bookId: req.body.bookId,
+              userId: req.user.id,
+            },
+          }
+        );
+        if (userBook) {
+          res.json({
+            succes: true,
+            msg: `Rating set to ${userBook.rating}`,
+            data: userBook,
+          });
+        } else {
+          res.status(204).end();
+        }
+      }
+    } catch (err) {
+      console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
+    }
+  });
+
+  // get all rewviews for a user
+  app.get("/api/user/reviews", async (req, res) => {
+    try {
+      if (!req.user) {
+        res.status(401).json({
+          success: false,
+          msg: "You must be signed in to access this resource.",
+        });
+      } else {
+        let reviews = db.UserBooks.findAll({
+          where: {
+            userId: req.user.id
+          },
+          include: db.Book
+        });
+        if (reviews) {
+          res.json(reviews);
+        }
+      }
+    } catch (err) {
+      console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
     }
   });
 
@@ -152,20 +318,29 @@ module.exports = function (app) {
       if (!req.user) {
         res.status(401).json({
           success: false,
-          msg: "You must be signed in to add a book to your library.",
+          msg: "You must be signed in to access this resource.",
         });
       } else {
-        let user = await db.User.findOne({
+        let result = await db.User.findOne({
           where: {
-            id: req.user.id
+            id: req.user.id,
           },
-          include: db.Book
+          include: db.Book,
+          include: db.UserBooks,
         });
-        console.log(user);
-        res.json(user.Books);
+        console.log(result);
+        res.json(result.Books);
       }
     } catch (err) {
       console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
     }
   });
 };
