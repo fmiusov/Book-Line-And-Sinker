@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.INTEGER,
       allowNull: false,
       autoIncrement: true,
+      primaryKey: true
     },
     userId: {
       type: DataTypes.INTEGER,
@@ -29,6 +30,9 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
     },
   });
-
+  UserBooks.associate = (models) => {
+    UserBooks.belongsTo(models.Book, {foreignKey: "bookId", targetKey: "id"});
+    UserBooks.belongsTo(models.User, {foreignKey: "userId", targetKey: "id"});
+  }
   return UserBooks;
 };

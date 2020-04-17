@@ -138,6 +138,7 @@ module.exports = function (app) {
           through: {
             rating: 0,
             isRead: false,
+            review: null
           },
         });
         if (result) {
@@ -150,12 +151,20 @@ module.exports = function (app) {
           res.json({
             success: false,
             msg: "Book not added",
-            data: result
+            data: result,
           });
         }
       }
     } catch (err) {
-      console.log(err);
+      console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
     }
   });
 
@@ -172,13 +181,13 @@ module.exports = function (app) {
         res.json({
           success: true,
           msg: "Review found",
-          data: result
+          data: result,
         });
       } else {
         res.status(401).json({
           success: false,
           msg: "No reviews",
-          data: result
+          data: result,
         });
       }
     } catch (err) {
@@ -261,7 +270,7 @@ module.exports = function (app) {
         if (userBook) {
           res.json({
             succes: true,
-            msg: `Rating set to ${userBook.rating}`,
+            msg: "Review added",
             data: userBook,
           });
         } else {
@@ -282,7 +291,7 @@ module.exports = function (app) {
   });
 
   // get all rewviews for a user
-  app.get("/api/user/reviews", async (req, res) => {
+  app.get("/api/reviews", async (req, res) => {
     try {
       if (!req.user) {
         res.status(401).json({
@@ -290,11 +299,14 @@ module.exports = function (app) {
           msg: "You must be signed in to access this resource.",
         });
       } else {
-        let reviews = db.UserBooks.findAll({
+        let reviews = await db.UserBooks.findAll({
           where: {
-            userId: req.user.id
+            userId: req.user.id,
+            review: {
+              [Op.ne]: null
+            }
           },
-          include: db.Book
+          include: db.Book,
         });
         if (reviews) {
           res.json(reviews);
@@ -326,7 +338,12 @@ module.exports = function (app) {
             id: req.user.id,
           },
           include: db.Book,
-          include: db.UserBooks,
+          // include: {
+          //   model: db.UserBooks,
+          //   where: {
+          //     userId: req.user.id
+          //   }
+          // },
         });
         console.log(result);
         res.json(result.Books);
