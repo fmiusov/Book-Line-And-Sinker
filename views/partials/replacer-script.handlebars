@@ -1,0 +1,48 @@
+<script>
+    $(document).ready(function() {
+        let $blah = $("#blah");
+        let $bookList = $("#book-list");
+        let $starRating = $(".star-rating");
+        $starRating.each(function () {
+            let $this = $(this);
+            let starRating = $this.data("rating");
+            updateRating($this, starRating);
+        })
+
+        $.getJSON("{{{apiUrl}}}", function (data) {
+            console.log(data);
+            $(".book-thumbnail").each(function () {
+                let $this = $(this);
+                let isbn = $this.attr("data-isbn");
+                if (data[isbn]) {
+                    $this.attr("src", data[isbn].thumbnail_url);
+                }
+            });
+        });
+
+        function updateRating(ratingElement, rating) {
+            let newRating = ""
+            for (var i = 0; i < 5; i++) {
+                if (i < rating) {
+                    newRating += "<span class=\"fa fa-star checked-star\" data-rating=\"" + (i + 1) + "\"></span>";
+                } else {
+                    newRating += "<span class=\"fa fa-star\" data-rating=\"" + (i + 1) + "\"></span>";
+                }
+            }
+            ratingElement.html(newRating);
+
+        }
+
+        $(".star-rating").on("click", ".fa-star", function(event) {
+            let $this = $(this);
+            let rating = $this.data("rating");
+            let $ratingP = $this.parent();
+            let bookId = $ratingP.data("book-id");
+            $.post("/api/rating", { bookId: bookId, rating: rating }, function () {
+                updateRating($ratingP, rating);
+            });
+
+        });
+
+    });
+</script>
