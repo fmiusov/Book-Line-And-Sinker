@@ -214,5 +214,13 @@
         });
       });
     </script>
+    <!-- GET Request for Possible User Data to Display-->
+    <script>
+      $(document).ready(function () {
+        $.get("/api/user_data").then(function (data) {
+          $(".member-name").text(data.email);
+        });
+      });
+    </script>
   </body>
 </html>

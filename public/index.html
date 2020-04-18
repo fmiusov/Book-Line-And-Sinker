@@ -39,6 +39,9 @@
           >Sign Up</a
         >
         <a href="/login" class="w3-bar-item w3-button" id="login-btn">Login</a>
+        <a href="/logout" class="w3-bar-item w3-button" id="logout-btn"
+          >Logout</a
+        >
         <a href="/" class="w3-bar-item w3-button"
           >My Account <span class="member-name"></span
         ></a>
@@ -213,6 +216,24 @@
           infinite: true,
           slidesToShow: 3,
           slidesToScroll: 1,
+        });
+      });
+    </script>
+    <!-- GET Request for Possible User Data to Display-->
+    <script>
+      $(document).ready(function () {
+        $.get("/api/user_data").then(function (data) {
+          $(".member-name").text(data.email);
+          console.log(data);
+          if (data = jQuery.isEmptyObject({})) {
+            $("#login-btn").addClass("w3-show");
+            $("#signup-btn").addClass("w3-show");
+          } else if (data != jQuery.isEmptyObject({})) {
+            $("#login-btn").addClass("w3-hide");
+            $("#signup-btn").addClass("w3-hide");
+          }
+          // $("#login-btn").addClass("w3-hide")
+          // $("#signup-btn").addClass("w3-hide")
         });
       });
     </script>

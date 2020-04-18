@@ -102,5 +102,13 @@
     integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
     crossorigin="anonymous"></script>
     <script></script>
+    <!-- GET Request for Possible User Data to Display-->
+    <script>
+      $(document).ready(function () {
+        $.get("/api/user_data").then(function (data) {
+          $(".member-name").text(data.email);
+        });
+      });
+    </script>
   </body>
 </html>
