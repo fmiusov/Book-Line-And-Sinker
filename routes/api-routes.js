@@ -478,4 +478,63 @@ module.exports = function (app) {
         .end();
     }
   });
+
+  app.get("/zack", async (req, res) => {
+    try {
+      if (!req.user) {
+        res.status(401).json({
+          success: false,
+          msg: "You must be signed in to access this resource.",
+        });
+      } else {
+        let result = await db.User.findOne({
+          where: {
+            id: req.user.id,
+          },
+          include: db.Book,
+        });
+        // console.log(result);
+        let output = result.Books.map((r) => ({
+          bookId: r.id,
+          title: r.title,
+          author: r.authors,
+          averageRating: r.averageRating,
+          isbn: r.isbn,
+          isbn13: r.isbn13,
+          languageCode: r.languageCode,
+          numPages: r.numPages,
+          publicationDate: r.publicationDate,
+          publisher: r.publisher,
+          createdAt: r.createdAt,
+          updatedAt: r.updatedAt,
+          isRead: r.UserBooks.isRead,
+          review: {
+            id: r.UserBooks.id,
+            rating: r.UserBooks.rating,
+            review: r.UserBooks.review,
+          },
+        }));
+        // console.log(result);
+        let apiUrl = `https://openlibrary.org/api/books?bibkeys=${output.reduce((total, currentValue, currentIndex) => {
+          return total + (currentIndex === 0 ? `ISBN:${currentValue.isbn}` : `,ISBN:${currentValue.isbn}`);
+        }, "")}&format=json`;
+        console.log(apiUrl);
+        // res.json(output);
+        res.render("zack", {
+          books: output,
+          apiUrl: apiUrl
+        });
+      }
+    } catch (err) {
+      console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
+    }
+  });
 };
