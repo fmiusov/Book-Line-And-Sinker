@@ -39,9 +39,12 @@
           >Sign Up</a
         >
         <a href="/login" class="w3-bar-item w3-button" id="login-btn">Login</a>
-        <a href="/" class="w3-bar-item w3-button"
+        <a href="/logout" class="w3-bar-item w3-button" id="logout-btn"
+          >Logout</a
+        >
+        <div class="w3-bar-item" id="account-btn"
           >My Account <span class="member-name"></span
-        ></a>
+        ></div>
         <input
           class="w3-radio"
           type="radio"
@@ -59,19 +62,19 @@
 
     <article class="bar-two">
       <a
-        href="./index.html"
+        href="/index"
         class="w3-bar-item w3-button bar-two-tabs"
         style="width: 30%;"
         >My Library</a
       >
       <a
-        href="./explore.html"
+        href="/explore"
         class="w3-bar-item w3-button bar-two-tabs"
         style="width: 30%;"
         >Explore</a
       >
       <a
-        href="./reviews.html"
+        href="/reviews"
         class="w3-bar-item w3-button bar-two-tabs"
         style="width: 30%;"
         >Reviews</a
@@ -213,6 +216,26 @@
           infinite: true,
           slidesToShow: 3,
           slidesToScroll: 1,
+        });
+      });
+    </script>
+    <!-- GET Request for Possible User Data to Display-->
+    <script>
+      $(document).ready(function () {
+        $.get("/api/user_data").then(function (data) {
+          $(".member-name").text(data.email);
+          console.log(data);
+          if (jQuery.isEmptyObject(data)) {
+            $("#login-btn").addClass("w3-show");
+            $("#signup-btn").addClass("w3-show");
+            $("#logout-btn").addClass("w3-hide");
+            $("#account-btn").addClass("w3-hide");
+          } else {
+            $("#login-btn").addClass("w3-hide");
+            $("#signup-btn").addClass("w3-hide");
+            $("#logout-btn").addClass("w3-show");
+            $("#account-btn").addClass("w3-show");
+          }
         });
       });
     </script>
