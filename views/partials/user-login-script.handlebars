@@ -1,0 +1,19 @@
+ <script>
+      $(document).ready(function () {
+        $.get("/api/user_data").then(function (data) {
+          $(".member-name").text(data.email);
+          console.log(data);
+          if (jQuery.isEmptyObject(data)) {
+            $("#login-btn").addClass("w3-show");
+            $("#signup-btn").addClass("w3-show");
+            $("#logout-btn").addClass("w3-hide");
+            $("#account-btn").addClass("w3-hide");
+          } else {
+            $("#login-btn").addClass("w3-hide");
+            $("#signup-btn").addClass("w3-hide");
+            $("#logout-btn").addClass("w3-show");
+            $("#account-btn").addClass("w3-show");
+          }
+        });
+      });
+    </script>
