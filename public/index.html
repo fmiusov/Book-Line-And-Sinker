@@ -42,9 +42,9 @@
         <a href="/logout" class="w3-bar-item w3-button" id="logout-btn"
           >Logout</a
         >
-        <a href="/" class="w3-bar-item w3-button" id="account-btn"
+        <div class="w3-bar-item" id="account-btn"
           >My Account <span class="member-name"></span
-        ></a>
+        ></div>
         <input
           class="w3-radio"
           type="radio"
@@ -62,19 +62,19 @@
 
     <article class="bar-two">
       <a
-        href="./index.html"
+        href="/index"
         class="w3-bar-item w3-button bar-two-tabs"
         style="width: 30%;"
         >My Library</a
       >
       <a
-        href="./explore.html"
+        href="/explore"
         class="w3-bar-item w3-button bar-two-tabs"
         style="width: 30%;"
         >Explore</a
       >
       <a
-        href="./reviews.html"
+        href="/reviews"
         class="w3-bar-item w3-button bar-two-tabs"
         style="width: 30%;"
         >Reviews</a
@@ -236,8 +236,6 @@
             $("#logout-btn").addClass("w3-show");
             $("#account-btn").addClass("w3-show");
           }
-          // $("#login-btn").addClass("w3-hide")
-          // $("#signup-btn").addClass("w3-hide")
         });
       });
     </script>

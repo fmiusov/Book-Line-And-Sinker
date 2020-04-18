@@ -33,13 +33,16 @@
         >Book, Line <span class="orangeText">&</span> Sinker</a
       >
       <div class="w3-right" id="srch-bar">
-        <a href="/" class="w3-bar-item w3-button"
-          >My Account <span class="member-name"></span
-        ></a>
         <a href="/signup" class="w3-bar-item w3-button" id="signup-btn"
           >Sign Up</a
         >
         <a href="/login" class="w3-bar-item w3-button" id="login-btn">Login</a>
+        <a href="/logout" class="w3-bar-item w3-button" id="logout-btn"
+          >Logout</a
+        >
+        <div class="w3-bar-item" id="account-btn"
+          >My Account <span class="member-name"></span
+        ></div>
         <input
         class="w3-radio"
         type="radio"
@@ -219,6 +222,18 @@
       $(document).ready(function () {
         $.get("/api/user_data").then(function (data) {
           $(".member-name").text(data.email);
+          console.log(data);
+          if (jQuery.isEmptyObject(data)) {
+            $("#login-btn").addClass("w3-show");
+            $("#signup-btn").addClass("w3-show");
+            $("#logout-btn").addClass("w3-hide");
+            $("#account-btn").addClass("w3-hide");
+          } else {
+            $("#login-btn").addClass("w3-hide");
+            $("#signup-btn").addClass("w3-hide");
+            $("#logout-btn").addClass("w3-show");
+            $("#account-btn").addClass("w3-show");
+          }
         });
       });
     </script>
