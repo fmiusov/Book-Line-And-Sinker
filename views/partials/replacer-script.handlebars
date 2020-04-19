@@ -3,13 +3,19 @@
         let $blah = $("#blah");
         let $bookList = $("#book-list");
         let $starRating = $(".star-rating");
+        let $images = $(".book-block img");
+        let isbns = [];
+        $images.each(function() {
+            isbns.push($(this).data("isbn"));
+        });
+        let apiUrl = `https://openlibrary.org/api/books?bibkeys=${isbns.join(",")}&format=json`;
         $starRating.each(function () {
             let $this = $(this);
             let starRating = $this.data("rating");
             updateRating($this, starRating);
-        })
+        });
 
-        $.getJSON("{{{apiUrl}}}", function (data) {
+        $.getJSON(apiUrl, function (data) {
             console.log(data);
             $(".book-thumbnail").each(function () {
                 let $this = $(this);

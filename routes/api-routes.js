@@ -86,7 +86,7 @@ module.exports = function (app) {
   app.get("/api/user_data", function (req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
-      res.json({});
+      res.status(401).redirect("/login");
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
@@ -173,6 +173,7 @@ module.exports = function (app) {
 
   app.get("/api/review/:bookId", async (req, res) => {
     try {
+      if (!req.user) return res.status(401).redirect("/login");
       let bookId = req.params.bookId;
       let result = await db.UserBooks.findOne({
         where: {
@@ -210,10 +211,7 @@ module.exports = function (app) {
   app.post("/api/rating", async (req, res) => {
     try {
       if (!req.user) {
-        res.status(401).json({
-          success: false,
-          msg: "You must be signed in to access this resource.",
-        });
+        res.status(401).redirect("/login");
       } else {
         let userBook = await db.UserBooks.update(
           {
@@ -253,10 +251,7 @@ module.exports = function (app) {
   app.post("/api/review", async (req, res) => {
     try {
       if (!req.user) {
-        res.status(401).json({
-          success: false,
-          msg: "You must be signed in to access this resource.",
-        });
+        res.status(401).redirect("/login");
       } else {
         let userBook = await db.UserBooks.update(
           {
@@ -297,10 +292,7 @@ module.exports = function (app) {
   app.get("/api/reviews", async (req, res) => {
     try {
       if (!req.user) {
-        res.status(401).json({
-          success: false,
-          msg: "You must be signed in to access this resource.",
-        });
+        res.status(401).redirect("/login");
       } else {
         let reviews = await db.UserBooks.findAll({
           where: {
@@ -350,10 +342,7 @@ module.exports = function (app) {
   app.get("/api/bookshelf", async (req, res) => {
     try {
       if (!req.user) {
-        res.status(401).json({
-          success: false,
-          msg: "You must be signed in to access this resource.",
-        });
+        res.status(401).redirect("/login");
       } else {
         let result = await db.User.findOne({
           where: {
@@ -401,10 +390,7 @@ module.exports = function (app) {
   app.get("/api/:bookId/reviews", async (req, res) => {
     try {
       if (!req.user) {
-        res.status(401).json({
-          success: false,
-          msg: "You must be signed in to access this resource.",
-        });
+        res.status(401).redirect("/login");
       } else {
         let result = await db.UserBooks.findOne({
           include: db.Book,
@@ -482,10 +468,7 @@ module.exports = function (app) {
   app.get("/zack", async (req, res) => {
     try {
       if (!req.user) {
-        res.status(401).json({
-          success: false,
-          msg: "You must be signed in to access this resource.",
-        });
+        res.status(401).redirect("/login");
       } else {
         let result = await db.User.findOne({
           where: {
@@ -514,15 +497,9 @@ module.exports = function (app) {
             review: r.UserBooks.review,
           },
         }));
-        // console.log(result);
-        let apiUrl = `https://openlibrary.org/api/books?bibkeys=${output.reduce((total, currentValue, currentIndex) => {
-          return total + (currentIndex === 0 ? `ISBN:${currentValue.isbn}` : `,ISBN:${currentValue.isbn}`);
-        }, "")}&format=json`;
-        console.log(apiUrl);
         // res.json(output);
         res.render("zack", {
           books: output,
-          apiUrl: apiUrl
         });
       }
     } catch (err) {
