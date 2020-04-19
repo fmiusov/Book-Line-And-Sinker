@@ -173,7 +173,9 @@ module.exports = function (app) {
 
   app.get("/api/review/:bookId", async (req, res) => {
     try {
-      if (!req.user) return res.status(401).redirect("/login");
+      if (!req.user) {
+        return res.status(401).redirect("/login");
+      }
       let bookId = req.params.bookId;
       let result = await db.UserBooks.findOne({
         where: {
