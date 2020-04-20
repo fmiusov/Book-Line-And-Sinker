@@ -1,17 +1,15 @@
 <script>
     $(document).ready(function () {
-        {{!-- let $blah = $("#blah"); --}}
-        {{!-- let $bookList = $("#book-list"); --}}
-        let $starRatings = $(".star-rating");
-        let $images = $(".book-block img");
+        let $starRating = $(".review-rating");
+        let $images = $(".review-box img");
         let isbns = [];
         $images.each(function () {
             isbns.push($(this).data("isbn"));
         });
         let apiUrl = `https://openlibrary.org/api/books?bibkeys=${isbns.join(",")}&format=json`;
-        $starRatings.each(function () {
+        $starRating.each(function () {
             let $this = $(this);
-            let starRating = $this.data("avg-rating");
+            let starRating = $this.data("rating");
             updateRating($this, starRating);
         });
 
@@ -35,30 +33,17 @@
                     newRating += "<span class=\"fa fa-star\" data-rating=\"" + (i + 1) + "\"></span>";
                 }
             }
+            $("#form-rating").val(rating);
             ratingElement.html(newRating);
         }
 
-        $(".star-rating").on("click", ".fa-star", function (event) {
+         $(".review-rating").on("click", ".fa-star", function (event) {
             let $this = $(this);
             let rating = $this.data("rating");
             let $ratingP = $this.parent();
             let bookId = $ratingP.data("book-id");
             $.post("/api/rating", { bookId: bookId, rating: rating }, function () {
                 updateRating($ratingP, rating);
-            });
-        });
-
-        $(".add-to-library").on("click", function(event) {
-
-            let $this = $(this);
-            event.preventDefault();
-            let bookId = $this.data("book-id");
-            $.post("/api/bookshelf/add", {bookId: bookId}, function() {
-                let parent = $this.parent();
-                $this.detach();
-                parent.append($('<a>Book Added</a>'));
-                $this.remove();
-                console.log("book added");
             });
         });
 

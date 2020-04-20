@@ -1,0 +1,24 @@
+<br />
+
+<!-- REVIEWS -->
+<section class="reviews-section">
+    <article class="review-bar">
+        <p id="reviews">Reviews</p>
+    </article>
+    {{#each reviews}}
+    <div class="review-box">
+        <h2 class="book-review">{{book.title}}</h2>
+        <h3 class="username">{{user.email}}</h3>
+        <h3 class="review">Review:</h3>
+        <p class="userreview">{{review}}</p>
+        <img class="book-thumbnail" src="/img/placeholder.png" data-isbn="ISBN:{{book.isbn}}" />
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+        <p class="review-rating" data-rating="{{rating}}"><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span><span class="fa fa-star"></span></p>
+    </div>
+    {{/each}}
+</section>
+<br />
+
+{{> review-replacer-script}}

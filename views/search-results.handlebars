@@ -1,6 +1,9 @@
 <h1>Search Results Page</h1>
 <h2 id="blah"></h2>
 <div class="grid-container book-list">
+  {{#unless books}}
+  <h1>No results to display</h1>
+  {{/unless}}
   {{#each books}}
   {{> books/search-result-book-block}}
   {{/each}}
