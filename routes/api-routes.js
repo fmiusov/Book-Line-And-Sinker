@@ -432,7 +432,7 @@ module.exports = function (app) {
           },
         }));
         // res.json(output);
-        res.render("reviews", { reviews: output });
+        res.render("reviews", { reviews: output, heading: "My reviews" });
       }
     } catch (err) {
       console.log("error", err);
@@ -452,6 +452,7 @@ module.exports = function (app) {
       if (!req.user) {
         res.status(401).redirect("/login");
       } else {
+        let heading = "No Reviews found";
         let bookId = req.params.bookId;
         let reviews = await db.UserBooks.findAll({
           where: {
@@ -485,7 +486,10 @@ module.exports = function (app) {
           },
         }));
         // res.json(output);
-        res.render("reviews", { reviews: output });
+        if (output.length > 0){
+          heading = `Reviews for ${output[0].book.title}`;
+        }
+        res.render("reviews", { reviews: output, heading: heading});
       }
     } catch (err) {
       console.log("error", err);
@@ -536,7 +540,7 @@ module.exports = function (app) {
           },
         }));
         // res.json(output);
-        res.render("reviews", { reviews: output });
+        res.render("reviews", { reviews: output, heading: "All Reviews" });
       }
     } catch (err) {
       console.log("error", err);
@@ -588,88 +592,6 @@ module.exports = function (app) {
         console.log(result);
         // res.json(output);
         res.render("library", { books: output });
-      }
-    } catch (err) {
-      console.log("error", err);
-      res
-        .status(500)
-        .json({
-          success: false,
-          msg: err.toString(),
-          data: err,
-        })
-        .end();
-    }
-  });
-
-  app.get("/api/:bookId/reviews", async (req, res) => {
-    try {
-      if (!req.user) {
-        res.status(401).redirect("/login");
-      } else {
-        let result = await db.UserBooks.findOne({
-          include: db.Book,
-          where: {
-            bookId: req.params.bookId,
-            userId: req.user.id,
-          },
-        });
-        let results = await db.UserBooks.findAll({
-          include: db.Book,
-          where: {
-            bookId: req.params.bookId,
-            userId: {
-              [Op.ne]: req.user.id,
-            },
-          },
-        });
-        console.log(result.Book);
-        let myReview = {
-          reviewId: result.id,
-          rating: result.rating,
-          review: result.review,
-          isRead: result.isRead,
-          createdAt: result.createdAt,
-          updatedAt: result.updatedAt,
-          book: {
-            bookId: result.Book.id,
-            title: result.Book.title,
-            author: result.Book.authors,
-            averageRating: result.Book.averageRating,
-            isbn: result.Book.isbn,
-            isbn13: result.Book.isbn13,
-            numPages: result.Book.numPages,
-            publicationDate: moment(result.Book.publicationDate)
-              .utc()
-              .format("MMM Do, YYYY"),
-            publisher: result.Book.publisher,
-          },
-        };
-        let otherReviews = results.map((r) => ({
-          reviewId: r.id,
-          rating: r.rating,
-          review: r.review,
-          isRead: r.isRead,
-          createdAt: r.createdAt,
-          updatedAt: r.updatedAt,
-          book: {
-            bookId: r.Book.id,
-            title: r.Book.title,
-            author: r.Book.authors,
-            averageRating: r.Book.averageRating,
-            isbn: r.Book.isbn,
-            isbn13: r.Book.isbn13,
-            numPages: r.Book.numPages,
-            publicationDate: moment(r.Book.publicationDate)
-              .utc()
-              .format("MMM Do, YYYY"),
-            publisher: r.Book.publisher,
-          },
-        }));
-        res.json({
-          userReview: myReview,
-          otherReviews: otherReviews,
-        });
       }
     } catch (err) {
       console.log("error", err);
