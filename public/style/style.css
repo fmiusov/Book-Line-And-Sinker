@@ -40,6 +40,20 @@
   background-color: #153144;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+.bar-three {
+  margin: 10px;
+  margin-right: 10px;
+  background-color: #0f0c30;
+  color: white;
+  text-align: center
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#b3-head {
+  text-align: center;
+  margin-left: 10px;
+}
 .bar-two-tabs {
   color: white;
   font-weight: bold;
@@ -80,6 +94,8 @@
 .review-box {
   border: 1px solid black;
   padding: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px; 
 }
 .username {
   font-size: 18px;
@@ -114,6 +130,8 @@
 .review-bar {
   background-color: #0f0c30;
   color: white;
+  margin: 0px;
+  margin-top: 10px;
 }
 #login-submit {
   background-color: orange;

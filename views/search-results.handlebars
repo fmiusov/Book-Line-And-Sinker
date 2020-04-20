@@ -1,8 +1,8 @@
 <h1>Search Results Page</h1>
 <h2 id="blah"></h2>
-<div class="grid-container book-list">
+<div class="w3-card-4 grid-container book-list">
   {{#unless books}}
-  <h1>No results to display</h1>
+  <h1 class="review-card-head review-bar">No results to display</h1>
   {{/unless}}
   {{#each books}}
   {{> books/search-result-book-block}}
