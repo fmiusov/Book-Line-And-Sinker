@@ -79,6 +79,9 @@ module.exports = function (app) {
 
   app.post("/search-results", async (req, res) => {
     try {
+      if (!req.user) {
+        return res.status(401).redirect("/login");
+      }
       let results;
       if (req.body["search-type"] === "author") {
         let author = authorRegexp(req.body["search-query"]);
@@ -134,7 +137,7 @@ module.exports = function (app) {
   app.post("/new/review/", async (req, res) => {
     try {
       if (!req.user) {
-        return res.status(401).redirect("/login").end();
+        return res.status(401).redirect("/login");
       }
       let bookId = req.body.bookId;
       let userBook = await db.UserBooks.findOne({
