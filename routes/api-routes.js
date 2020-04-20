@@ -109,6 +109,9 @@ module.exports = function (app) {
           ],
         });
       }
+      if (results.length === 0) {
+        return res.render("search-results", { books: [] });
+      }
       let output = results.map((r) => ({
         bookId: r.id,
         title: r.title,
@@ -123,6 +126,51 @@ module.exports = function (app) {
       }));
       console.log(results[0].publicationDate, output[0].publicationDate);
       res.render("search-results", { books: output });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+  // accepts { "bookId": <book.id> }
+  app.post("/new/review/", async (req, res) => {
+    try {
+      if (!req.user) {
+        return res.status(401).redirect("/login").end();
+      }
+      let bookId = req.body.bookId;
+      let userBook = await db.UserBooks.findOne({
+        where: {
+          userId: req.user.id,
+          bookId: bookId,
+        },
+        include: {
+          model: db.Book,
+          where: {
+            id: bookId,
+          },
+        },
+      });
+      // console.log(userBook);
+      res.render("make-review", {
+        book: {
+          bookId: userBook.Book.id,
+          title: userBook.Book.title,
+          author: userBook.Book.author,
+          averageRatin: userBook.Book.averageRating,
+          isbn: userBook.Book.isbn,
+          isbn13: userBook.Book.isbn13,
+          languageCode: userBook.Book.languageCode,
+          numPages: userBook.Book.numPages,
+          publicationDate: moment(userBook.Book.publicationDate)
+            .utc()
+            .format("MMM Do, YYYY"),
+          publisher: userBook.Book.publisher,
+          rating: userBook.rating,
+        },
+        user: {
+          email: req.user.email,
+          id: req.user.id,
+        },
+      });
     } catch (err) {
       console.log(err);
     }
@@ -308,7 +356,7 @@ module.exports = function (app) {
   });
 
   // acceps JSON object { "bookId": <book.id>, "rating": <1 - 5>, review: <text>}
-  app.post("/api/review", async (req, res) => {
+  app.post("/post/review", async (req, res) => {
     try {
       if (!req.user) {
         res.status(401).redirect("/login");
@@ -326,11 +374,12 @@ module.exports = function (app) {
           }
         );
         if (userBook) {
-          res.json({
-            succes: true,
-            msg: "Review added",
-            data: userBook,
-          });
+          // res.json({
+          //   succes: true,
+          //   msg: "Review added",
+          //   data: userBook,
+          // });
+          res.redirect("/reviews");
         } else {
           res.status(204).end();
         }
@@ -349,7 +398,7 @@ module.exports = function (app) {
   });
 
   // get all rewviews for a user
-  app.get("/api/reviews", async (req, res) => {
+  app.get("/reviews", async (req, res) => {
     try {
       if (!req.user) {
         res.status(401).redirect("/login");
@@ -370,6 +419,7 @@ module.exports = function (app) {
           isRead: r.isRead,
           createdAt: r.createdAt,
           updatedAt: r.updatedAt,
+          user: req.user,
           book: {
             bookId: r.Book.id,
             title: r.Book.title,
@@ -378,13 +428,14 @@ module.exports = function (app) {
             isbn: r.Book.isbn,
             isbn13: r.Book.isbn13,
             numPages: r.Book.numPages,
-            publicationDate: moment(r.Book.publicationDate).utc().format("MMM Do, YYYY"),
+            publicationDate: moment(r.Book.publicationDate)
+              .utc()
+              .format("MMM Do, YYYY"),
             publisher: r.Book.publisher,
           },
         }));
-        if (output) {
-          res.json(output);
-        }
+        // res.json(output);
+        res.render("reviews", { reviews: output });
       }
     } catch (err) {
       console.log("error", err);
@@ -420,7 +471,9 @@ module.exports = function (app) {
           isbn13: r.isbn13,
           languageCode: r.languageCode,
           numPages: r.numPages,
-          publicationDate: moment(r.publicationDate).utc().format("MMM Do, YYYY"),
+          publicationDate: moment(r.publicationDate)
+            .utc()
+            .format("MMM Do, YYYY"),
           publisher: r.publisher,
           createdAt: r.createdAt,
           updatedAt: r.updatedAt,
@@ -433,7 +486,7 @@ module.exports = function (app) {
         }));
         console.log(result);
         // res.json(output);
-        res.render("library", {books: output});
+        res.render("library", { books: output });
       }
     } catch (err) {
       console.log("error", err);
@@ -485,7 +538,9 @@ module.exports = function (app) {
             isbn: result.Book.isbn,
             isbn13: result.Book.isbn13,
             numPages: result.Book.numPages,
-            publicationDate: moment(result.Book.publicationDate).utc().format("MMM Do, YYYY"),
+            publicationDate: moment(result.Book.publicationDate)
+              .utc()
+              .format("MMM Do, YYYY"),
             publisher: result.Book.publisher,
           },
         };
@@ -504,7 +559,9 @@ module.exports = function (app) {
             isbn: r.Book.isbn,
             isbn13: r.Book.isbn13,
             numPages: r.Book.numPages,
-            publicationDate: moment(r.Book.publicationDate).utc().format("MMM Do, YYYY"),
+            publicationDate: moment(r.Book.publicationDate)
+              .utc()
+              .format("MMM Do, YYYY"),
             publisher: r.Book.publisher,
           },
         }));
@@ -547,7 +604,9 @@ module.exports = function (app) {
           isbn13: r.isbn13,
           languageCode: r.languageCode,
           numPages: r.numPages,
-          publicationDate: moment(r.publicationDate).utc().format("MMM Do, YYYY"),
+          publicationDate: moment(r.publicationDate)
+            .utc()
+            .format("MMM Do, YYYY"),
           publisher: r.publisher,
           createdAt: r.createdAt,
           updatedAt: r.updatedAt,
