@@ -239,3 +239,12 @@ footer {
 .checked-star {
     color: orange;
 }
+
+.teal-btn {
+  background-color: #153144;
+  color: black;
+  border: none;
+  color: white;
+  font-weight: bold;
+  margin: 3px;
+}
