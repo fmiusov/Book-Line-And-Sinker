@@ -12,40 +12,44 @@
   <!-- Add the slick-theme.css if you want default styling -->
   <link rel="stylesheet" type="text/css"
     href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-  <link rel="stylesheet" href="./style/style.css" />
+  <link rel="stylesheet" href="/style/style.css" />
   <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.0.min.js"
     integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+  <script src="/js/search.js"></script>
 </head>
 
 <body>
   <!-- NAVBAR -->
   <div class="w3-bar navbar">
     <a href="#" class="w3-bar-item w3-button brand-title">Book, Line <span class="orangeText">&</span> Sinker</a>
+    <form action="/search-results" method="post">
+      <div class="w3-right" id="srch-bar">
+        <a href="/signup" class="w3-bar-item w3-button" id="signup-btn">Sign Up</a>
+        <a href="/login" class="w3-bar-item w3-button" id="login-btn">Login</a>
+        <a href="/" class="w3-bar-item w3-button">My Account <span class="member-name"></span></a>
+        <form action="/api/search" method="post"></form>
+        <input class="w3-radio" type="radio" name="search-type" value="author" checked />
+        <label>Author</label>
+        <input class="w3-radio" type="radio" name="search-type" value="title" />
+        <label>Title</label>
+        <input type="text" class="w3-bar-item w3-input" placeholder="Search" name="search-query"/>
+        <button type="submit" class="w3-bar-item w3-button" id="srch-btn">Search</a>
 
-    <div class="w3-right" id="srch-bar">
-      <a href="/signup" class="w3-bar-item w3-button" id="signup-btn">Sign Up</a>
-      <a href="/login" class="w3-bar-item w3-button" id="login-btn">Login</a>
-      <a href="/" class="w3-bar-item w3-button">My Account <span class="member-name"></span></a>
-      <input class="w3-radio" type="radio" name="search-type" value="author" checked />
-      <label>Author</label>
-      <input class="w3-radio" type="radio" name="search-type" value="title" />
-      <label>Title</label>
-      <input type="text" class="w3-bar-item w3-input" placeholder="Search" />
-      <a href="#" class="w3-bar-item w3-button" id="srch-btn">Search</a>
-    </div>
+      </div>
+    </form>
   </div>
 
   <article class="bar-two">
-    <a href="/index" class="w3-bar-item w3-button bar-two-tabs" style="width: 30%;">My Library</a>
+    <a href="/library" class="w3-bar-item w3-button bar-two-tabs" style="width: 30%;">My Library</a>
     <a href="/explore" class="w3-bar-item w3-button bar-two-tabs" style="width: 30%;">Explore</a>
     <a href="/reviews" class="w3-bar-item w3-button bar-two-tabs" style="width: 30%;">Reviews</a>
   </article>
 
-{{{body}}}
+  {{{body}}}
 
   <!-- footer -->
-    <footer>©Copyright BLS LLC</footer>
+  <footer>©Copyright BLS LLC</footer>
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.0.min.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>

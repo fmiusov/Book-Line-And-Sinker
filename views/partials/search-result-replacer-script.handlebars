@@ -1,17 +1,17 @@
 <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
         let $blah = $("#blah");
         let $bookList = $("#book-list");
         let $starRating = $(".star-rating");
         let $images = $(".book-block img");
         let isbns = [];
-        $images.each(function() {
+        $images.each(function () {
             isbns.push($(this).data("isbn"));
         });
         let apiUrl = `https://openlibrary.org/api/books?bibkeys=${isbns.join(",")}&format=json`;
         $starRating.each(function () {
             let $this = $(this);
-            let starRating = $this.data("rating");
+            let starRating = $this.data("avg-rating");
             updateRating($this, starRating);
         });
 
@@ -38,7 +38,7 @@
             ratingElement.html(newRating);
         }
 
-        $(".star-rating").on("click", ".fa-star", function(event) {
+        $(".star-rating").on("click", ".fa-star", function (event) {
             let $this = $(this);
             let rating = $this.data("rating");
             let $ratingP = $this.parent();
@@ -46,7 +46,20 @@
             $.post("/api/rating", { bookId: bookId, rating: rating }, function () {
                 updateRating($ratingP, rating);
             });
+        });
 
+        $(".add-to-library").on("click", function(event) {
+
+            let $this = $(this);
+            event.preventDefault();
+            let bookId = $this.data("book-id");
+            $.post("/api/bookshelf/add", {bookId: bookId}, function() {
+                let parent = $this.parent();
+                $this.detach();
+                parent.append($('<a>Book Added</a>'));
+                $this.remove();
+                console.log("book added");
+            });
         });
 
     });

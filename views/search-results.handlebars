@@ -1,10 +1,10 @@
+<h1>Search Results Page</h1>
+<h2 id="blah"></h2>
+<div class="grid-container book-list">
+  {{#each books}}
+  {{> books/search-result-book-block}}
+  {{/each}}
+</div>
 
-
-  <div class="w3-card-4">
-    <div class="w3-container review-card-head">
-      <h4>Submit your book review</h4>
-    </div>
-    <div class="search-result">
-      {{#each bookResult}}
-    </div>
-  </div>
+{{> search-result-replacer-script}}
+{{> user-login-script}}
