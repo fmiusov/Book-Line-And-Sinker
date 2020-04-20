@@ -249,3 +249,7 @@ footer {
 .checked-star {
     color: orange;
 }
+
+.book-thumbnail {
+  margin-bottom: 5px;;
+}
