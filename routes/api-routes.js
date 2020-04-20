@@ -450,6 +450,59 @@ module.exports = function (app) {
     }
   });
 
+  app.get("/reviews/:bookId", async (req, res) => {
+    try {
+      if (!req.user) {
+        res.status(401).redirect("/login");
+      } else {
+        let bookId = req.params.bookId;
+        let reviews = await db.UserBooks.findAll({
+          where: {
+            bookId: bookId,
+            review: {
+              [Op.ne]: null,
+            },
+          },
+          include: db.Book,
+        });
+        let output = reviews.map((r) => ({
+          reviewId: r.id,
+          rating: r.rating,
+          review: r.review,
+          isRead: r.isRead,
+          createdAt: r.createdAt,
+          updatedAt: r.updatedAt,
+          user: req.user,
+          book: {
+            bookId: r.Book.id,
+            title: r.Book.title,
+            author: r.Book.authors,
+            averageRating: r.Book.averageRating,
+            isbn: r.Book.isbn,
+            isbn13: r.Book.isbn13,
+            numPages: r.Book.numPages,
+            publicationDate: moment(r.Book.publicationDate)
+              .utc()
+              .format("MMM Do, YYYY"),
+            publisher: r.Book.publisher,
+          },
+        }));
+        // res.json(output);
+        res.render("reviews", { reviews: output });
+      }
+    } catch (err) {
+      console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
+    }
+  });
+
   app.get("/library", async (req, res) => {
     try {
       if (!req.user) {
