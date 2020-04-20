@@ -209,10 +209,7 @@ module.exports = function (app) {
   app.get("/api/user_data", function (req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
-      res.json({
-        email: null,
-        id: null,
-      });
+      res.json({});
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
@@ -406,6 +403,110 @@ module.exports = function (app) {
         let reviews = await db.UserBooks.findAll({
           where: {
             userId: req.user.id,
+            review: {
+              [Op.ne]: null,
+            },
+          },
+          include: db.Book,
+        });
+        let output = reviews.map((r) => ({
+          reviewId: r.id,
+          rating: r.rating,
+          review: r.review,
+          isRead: r.isRead,
+          createdAt: r.createdAt,
+          updatedAt: r.updatedAt,
+          user: req.user,
+          book: {
+            bookId: r.Book.id,
+            title: r.Book.title,
+            author: r.Book.authors,
+            averageRating: r.Book.averageRating,
+            isbn: r.Book.isbn,
+            isbn13: r.Book.isbn13,
+            numPages: r.Book.numPages,
+            publicationDate: moment(r.Book.publicationDate)
+              .utc()
+              .format("MMM Do, YYYY"),
+            publisher: r.Book.publisher,
+          },
+        }));
+        // res.json(output);
+        res.render("reviews", { reviews: output });
+      }
+    } catch (err) {
+      console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
+    }
+  });
+
+  app.get("/reviews/book/:bookId", async (req, res) => {
+    try {
+      if (!req.user) {
+        res.status(401).redirect("/login");
+      } else {
+        let bookId = req.params.bookId;
+        let reviews = await db.UserBooks.findAll({
+          where: {
+            bookId: bookId,
+            review: {
+              [Op.ne]: null,
+            },
+          },
+          include: db.Book,
+        });
+        let output = reviews.map((r) => ({
+          reviewId: r.id,
+          rating: r.rating,
+          review: r.review,
+          isRead: r.isRead,
+          createdAt: r.createdAt,
+          updatedAt: r.updatedAt,
+          user: req.user,
+          book: {
+            bookId: r.Book.id,
+            title: r.Book.title,
+            author: r.Book.authors,
+            averageRating: r.Book.averageRating,
+            isbn: r.Book.isbn,
+            isbn13: r.Book.isbn13,
+            numPages: r.Book.numPages,
+            publicationDate: moment(r.Book.publicationDate)
+              .utc()
+              .format("MMM Do, YYYY"),
+            publisher: r.Book.publisher,
+          },
+        }));
+        // res.json(output);
+        res.render("reviews", { reviews: output });
+      }
+    } catch (err) {
+      console.log("error", err);
+      res
+        .status(500)
+        .json({
+          success: false,
+          msg: err.toString(),
+          data: err,
+        })
+        .end();
+    }
+  });
+
+  app.get("/reviews/all", async (req, res) => {
+    try {
+      if (!req.user) {
+        res.status(401).redirect("/login");
+      } else {
+        let reviews = await db.UserBooks.findAll({
+          where: {
             review: {
               [Op.ne]: null,
             },
