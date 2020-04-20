@@ -55,9 +55,8 @@
             let bookId = $this.data("book-id");
             $.post("/api/bookshelf/add", {bookId: bookId}, function() {
                 let parent = $this.parent();
-                $this.detach();
-                parent.append($('<a>Book Added</a>'));
-                $this.remove();
+                $this.text("Book Added");
+                $this.addClass("w3-disabled");
                 console.log("book added");
             });
         });
