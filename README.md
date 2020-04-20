@@ -1,30 +1,59 @@
-# Book-Line-And-Sinker
+# Book-Line-and-Sinker
+[![License: Unlicense](https://img.shields.io/badge/license-Unlicense-blue.svg)](http://unlicense.org/)
 
-## GET: /api/books/title/search/:title
-returns all books with 'title' in the name
+## Description
 
-## GET: /api/books/author/search/:author
-returns all books by the author
+Book, Line & Sinker provides a resource for readers where they can discover new books, keep a library of books they have read or would like to read, and view and contribute book reviews.
 
-## GET: /api/bookshelf
-returns all books for the authenticated user
+## Table of Contents
 
-## POST: /api/bookshelf/add
-accepts JSON: `{ "bookId": <book.id> }`
-returns JSON: `{ "success": <true/false>, "msg": <message>, "data": <inserted record> }`
+* [Installation](#installation)
 
-## GET: /api/review/:bookId
-returns success/fail object with the review in the `data` field
+* [Usage](#usage)
 
-## POST: /api/rating
-accepts JSON: `{ "bookId": <book.id>, "rating": <1 - 5> }`
-returns success/fail object with the review in the `data` field
+* [License](#license)
 
-## POST: /api/review
-accepts JSON: `{ "bookId": <book.id>, "rating": <1 - 5>, review: <text> }`
-returns success/fail object with the review in the `data` field
+* [Contributing](#contributing)
 
-## GET: /api/reviews
-returns all reviews by the authenticated user
+* [Screenshot](#screenshot)
 
-readme change for heroku
+* [Links](#links)
+
+* [Questions](#questions)
+
+## Installation
+
+To install the necessary dependencies, run the following command:
+
+```
+npm install
+```
+
+## Usage
+
+Once you've cloned the repo and installed dependencies, simply run `npm run start` to start the executeion of the `server.js` file. This will host the app locally at http://localhost:3000 by default. Sign in and start adding books to your library.
+
+## License
+
+This project does not have a license. You are free to clone and distribute as you see fit. We assume no liability.
+
+## Contributing
+
+Contributions are welcome. Just send a Pull Request.
+
+## Screenshot
+
+![Screenshot](./public/img/screenshots/screenshot.png "Screenshot")
+
+## Links
+
+* [Github Repo](https://github.com/fmiusov/Book-Line-And-Sinker)
+
+* [Heroku Hosted Page](https://salty-sea-30078.herokuapp.com/)
+
+## Questions
+
+<img src="https://avatars3.githubusercontent.com/u/28291062?v=4" alt="avatar" style="border-radius: 16px;" width="30" /> <img src="https://avatars0.githubusercontent.com/u/59581501?v=4" alt="avatar" style="border-radius: 16px;" width="30" /> <img src="https://avatars0.githubusercontent.com/u/59235205?v=4" alt="avatar" style="border-radius: 16px;" width="30" /> <img src="https://avatars2.githubusercontent.com/u/58233364?v=4" alt="avatar" style="border-radius: 16px;" width="30" />
+
+If you have any questions about the repo, open an issue or contact [zackapotamus](https://api.github.com/users/zackapotamus), [smithse4](https://api.github.com/users/smithse4), [fmiusov](https://api.github.com/users/fmiusov), or [jguerra21](https://api.github.com/users/jguerra21).
+
