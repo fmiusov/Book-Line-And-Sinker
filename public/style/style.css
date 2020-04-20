@@ -1,3 +1,7 @@
+body {
+  font: sans-serif;
+}
+
 .navbar {
   background-color: #0f0c30;
   color: white;
@@ -38,7 +42,7 @@
   margin: 10px;
   margin-right: 10px;
   background-color: #153144;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: sans-serif;
 }
 
 .bar-three {
@@ -47,7 +51,7 @@
   background-color: #0f0c30;
   color: white;
   text-align: center
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-family: sans-serif;
 }
 
 #b3-head {
@@ -131,8 +135,14 @@
   background-color: #0f0c30;
   color: white;
   margin: 0px;
-  margin-top: 10px;
+
 }
+
+.rs {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 #login-submit {
   background-color: orange;
   color: black;
