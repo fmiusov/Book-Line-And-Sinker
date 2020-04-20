@@ -1,30 +1,36 @@
 <br />
 
 <!-- REVIEWS -->
-<section class="reviews-section">
-    <article class="review-bar">
-        <p id="reviews">Reviews</p>
-    </article>
-    <form action="/post/review" method="POST">
-        <div class="review-box">
-            <h2 class="book-review">{{book.title}}</h2>
-            <h3 class="username">{{user.email}}</h3>
-            <h3 class="review">Review:</h3>
-            <p class="userreview">
+<section class="review-form-section reviews-section">
+    <div class="w3-card-4">
+        <article class="w3-container review-card-head review-bar">
+            <p id="reviews">Submit your book review</p>
+        </article>
+        <form class="w3-container" action="/post/review" method="POST">
+            <div class="review-box">
+                <h2 class="book-review">{{book.title}}</h2>
+                <h3 class="username">{{user.email}}</h3>
+                <h3 class="review">Review:</h3>
+                <p class="userreview">
 
-                <textarea name="review" placeholder="Enter your review..." rows="6" cols="50"></textarea>
-                <input type="hidden" value="0" id="form-rating" name="rating" />
-                <input type="hidden" value="{{book.bookId}}" name="bookId" />
+                    <textarea class="w3-input w3-border w3-light-grey review-input"name="review" placeholder="Enter your review..." rows="6" cols="50"></textarea>
+                    <input type="hidden" value="0" id="form-rating" name="rating" />
+                    <input type="hidden" value="{{book.bookId}}" name="bookId" />
 
-            </p>
-            <img class="book-thumbnail" src="/img/placeholder.png" data-isbn="ISBN:{{book.isbn}}" />
-            <link rel="stylesheet"
-                href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-            <p>Set your rating:</p>
-            <p class="review-rating" data-rating="{{book.rating}}" data-book-id="{{book.bookId}}"><span class="fa fa-star" data-rating="1"></span><span class="fa fa-star" data-rating="2"></span><span class="fa fa-star" data-rating="3"></span><span class="fa fa-star" data-rating="4"></span><span class="fa fa-star" data-rating="5"></span></p>
-            <button type="submit">Submit Review</button>
-        </div>
-    </form>
+                </p>
+                <img class="book-thumbnail" src="/img/placeholder.png" data-isbn="ISBN:{{book.isbn}}" />
+                <link rel="stylesheet"
+                    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+                <p>Set your rating:</p>
+                <p class="review-rating" data-rating="{{book.rating}}" data-book-id="{{book.bookId}}"><span
+                        class="fa fa-star" data-rating="1"></span><span class="fa fa-star" data-rating="2"></span><span
+                        class="fa fa-star" data-rating="3"></span><span class="fa fa-star" data-rating="4"></span><span
+                        class="fa fa-star" data-rating="5"></span></p>
+                <button type="submit">Submit Review</button>
+            </div>
+        </form>
+    </div>
+
 </section>
 <br />
 
