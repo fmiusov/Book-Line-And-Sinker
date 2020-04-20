@@ -13,8 +13,11 @@ module.exports = function (app) {
   // Each of the below routes just handles the HTML page that the user gets sent to.
 
   app.get("/", function (req, res) {
+    if (!req.user) {
+      return res.status(401).redirect("/login");
+    }
     // res.sendFile(path.join(__dirname, "../public/index.html"));
-    res.render("index");
+    res.redirect("/library");
   });
   app.get("/explore", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/explore.html"));
