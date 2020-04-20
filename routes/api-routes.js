@@ -464,7 +464,7 @@ module.exports = function (app) {
               [Op.ne]: null,
             },
           },
-          include: db.Book,
+          include: [db.Book, db.User]
         });
         let output = reviews.map((r) => ({
           reviewId: r.id,
@@ -473,7 +473,10 @@ module.exports = function (app) {
           isRead: r.isRead,
           createdAt: r.createdAt,
           updatedAt: r.updatedAt,
-          user: req.user,
+          user: {
+            id: r.User.id,
+            email: r.User.email
+          },
           book: {
             bookId: r.Book.id,
             title: r.Book.title,
@@ -518,8 +521,9 @@ module.exports = function (app) {
               [Op.ne]: null,
             },
           },
-          include: db.Book,
+          include: [db.Book, db.User]
         });
+        // console.log(reviews);
         let output = reviews.map((r) => ({
           reviewId: r.id,
           rating: r.rating,
@@ -527,7 +531,10 @@ module.exports = function (app) {
           isRead: r.isRead,
           createdAt: r.createdAt,
           updatedAt: r.updatedAt,
-          user: req.user,
+          user: {
+            id: r.User.id,
+            email: r.User.email
+          },
           book: {
             bookId: r.Book.id,
             title: r.Book.title,
@@ -542,7 +549,7 @@ module.exports = function (app) {
             publisher: r.Book.publisher,
           },
         }));
-        // res.json(output);
+        console.log(output);
         res.render("reviews", { reviews: output, heading: "All Reviews" });
       }
     } catch (err) {
