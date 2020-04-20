@@ -9,6 +9,7 @@
 const db = require("../models");
 const { Op } = db.Sequelize;
 const passport = require("../config/passport");
+const moment = require("moment");
 
 // helper functions
 const authorRegexp = (author) => {
@@ -31,7 +32,7 @@ const authorRegexp = (author) => {
 // =============================================================
 module.exports = function (app) {
   // GET route for getting all of the posts
-  app.get("/api/books/title/search/:title", async (req, res) => {
+  app.get("/books/title/search/:title", async (req, res) => {
     try {
       let nameLike = `%${req.params.title}%`;
       let results = await db.Book.findAll({
@@ -48,11 +49,85 @@ module.exports = function (app) {
           ["averageRating", "DESC"],
         ],
       });
-      res.json(results);
+      // res.json(results);
+      res.render("search-results", { books: results });
     } catch (err) {
       console.log(err);
     }
   });
+
+  app.get("/books/author/search/:author", async (req, res) => {
+    try {
+      let author = authorRegexp(req.params.author);
+      let results = await db.Book.findAll({
+        where: {
+          authors: {
+            [Op.regexp]: author,
+          },
+        },
+        order: [
+          ["ratingsCount", "DESC"],
+          ["averageRating", "DESC"],
+        ],
+      });
+      res.render("search-results", { books: results });
+      // res.json(results);
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
+  app.post("/search-results", async (req, res) => {
+    try {
+      let results;
+      if (req.body["search-type"] === "author") {
+        let author = authorRegexp(req.body["search-query"]);
+        results = await db.Book.findAll({
+          where: {
+            authors: {
+              [Op.regexp]: author,
+            },
+          },
+          order: [
+            ["ratingsCount", "DESC"],
+            ["averageRating", "DESC"],
+          ],
+        });
+      } else {
+        results = await db.Book.findAll({
+          where: {
+            title: {
+              [Op.like]: `%${req.body["search-query"]}%`,
+            },
+            languageCode: {
+              [Op.like]: "en%",
+            },
+          },
+          order: [
+            ["ratingsCount", "DESC"],
+            ["averageRating", "DESC"],
+          ],
+        });
+      }
+      let output = results.map((r) => ({
+        bookId: r.id,
+        title: r.title,
+        author: r.authors,
+        averageRating: r.averageRating,
+        isbn: r.isbn,
+        isbn13: r.isbn13,
+        languageCode: r.languageCode,
+        numPages: r.numPages,
+        publicationDate: moment(r.publicationDate).utc().format("MMM Do, YYYY"),
+        publisher: r.publisher,
+      }));
+      console.log(results[0].publicationDate, output[0].publicationDate);
+      res.render("search-results", { books: output });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -86,7 +161,10 @@ module.exports = function (app) {
   app.get("/api/user_data", function (req, res) {
     if (!req.user) {
       // The user is not logged in, send back an empty object
-      res.status(401).redirect("/login");
+      res.json({
+        email: null,
+        id: null,
+      });
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
@@ -94,26 +172,6 @@ module.exports = function (app) {
         email: req.user.email,
         id: req.user.id,
       });
-    }
-  });
-
-  app.get("/api/books/author/search/:author", async (req, res) => {
-    try {
-      let author = authorRegexp(req.params.author);
-      let results = await db.Book.findAll({
-        where: {
-          authors: {
-            [Op.regexp]: author,
-          },
-        },
-        order: [
-          ["ratingsCount", "DESC"],
-          ["averageRating", "DESC"],
-        ],
-      });
-      res.json(results);
-    } catch (err) {
-      console.log(err);
     }
   });
 
@@ -320,7 +378,7 @@ module.exports = function (app) {
             isbn: r.Book.isbn,
             isbn13: r.Book.isbn13,
             numPages: r.Book.numPages,
-            publicationDate: r.Book.publicationDate,
+            publicationDate: moment(r.Book.publicationDate).utc().format("MMM Do, YYYY"),
             publisher: r.Book.publisher,
           },
         }));
@@ -341,7 +399,7 @@ module.exports = function (app) {
     }
   });
 
-  app.get("/api/bookshelf", async (req, res) => {
+  app.get("/library", async (req, res) => {
     try {
       if (!req.user) {
         res.status(401).redirect("/login");
@@ -362,7 +420,7 @@ module.exports = function (app) {
           isbn13: r.isbn13,
           languageCode: r.languageCode,
           numPages: r.numPages,
-          publicationDate: r.publicationDate,
+          publicationDate: moment(r.publicationDate).utc().format("MMM Do, YYYY"),
           publisher: r.publisher,
           createdAt: r.createdAt,
           updatedAt: r.updatedAt,
@@ -374,7 +432,8 @@ module.exports = function (app) {
           },
         }));
         console.log(result);
-        res.json(output);
+        // res.json(output);
+        res.render("library", {books: output});
       }
     } catch (err) {
       console.log("error", err);
@@ -398,7 +457,7 @@ module.exports = function (app) {
           include: db.Book,
           where: {
             bookId: req.params.bookId,
-            userId: req.user.id
+            userId: req.user.id,
           },
         });
         let results = await db.UserBooks.findAll({
@@ -406,9 +465,9 @@ module.exports = function (app) {
           where: {
             bookId: req.params.bookId,
             userId: {
-              [Op.ne]: req.user.id
-            }
-          }
+              [Op.ne]: req.user.id,
+            },
+          },
         });
         console.log(result.Book);
         let myReview = {
@@ -426,7 +485,7 @@ module.exports = function (app) {
             isbn: result.Book.isbn,
             isbn13: result.Book.isbn13,
             numPages: result.Book.numPages,
-            publicationDate: result.Book.publicationDate,
+            publicationDate: moment(result.Book.publicationDate).utc().format("MMM Do, YYYY"),
             publisher: result.Book.publisher,
           },
         };
@@ -445,13 +504,13 @@ module.exports = function (app) {
             isbn: r.Book.isbn,
             isbn13: r.Book.isbn13,
             numPages: r.Book.numPages,
-            publicationDate: r.Book.publicationDate,
+            publicationDate: moment(r.Book.publicationDate).utc().format("MMM Do, YYYY"),
             publisher: r.Book.publisher,
           },
         }));
         res.json({
           userReview: myReview,
-          otherReviews: otherReviews
+          otherReviews: otherReviews,
         });
       }
     } catch (err) {
@@ -488,7 +547,7 @@ module.exports = function (app) {
           isbn13: r.isbn13,
           languageCode: r.languageCode,
           numPages: r.numPages,
-          publicationDate: r.publicationDate,
+          publicationDate: moment(r.publicationDate).utc().format("MMM Do, YYYY"),
           publisher: r.publisher,
           createdAt: r.createdAt,
           updatedAt: r.updatedAt,
@@ -499,8 +558,9 @@ module.exports = function (app) {
             review: r.UserBooks.review,
           },
         }));
+        console.log(result.Books[0].publicationDate, output[0].publicationDate);
         // res.json(output);
-        res.render("zack", {
+        res.render("library", {
           books: output,
         });
       }
